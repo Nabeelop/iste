@@ -1,26 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* --- COLOR PALETTE (ADJUSTED FOR SIG LOGOS) --- */
+  
+  /* Background: Changed to #0B0B15 
+     Reason: This acts as a seamless floor for the SIG icons so their 
+     dark bases blend in effectively. 
+  */
+  --background: #0B0B15;       
+  
+  /* Surface: #151525 
+     Reason: Slightly lighter version of background for the Navbar.
+  */
+  --surface: #151525;          
+  
+  /* Card: rgba(255, 255, 255, 0.03)
+     Reason: "Glassmorphism". By using a transparent card, we don't 
+     create a color clash with the icon. It adds a modern frost effect.
+  */
+  --card: rgba(255, 255, 255, 0.03);             
+  
+  /* Accents - Kept form Logo */
+  --primary: #00E5FF;          /* Neon Cyan */
+  --secondary: #FF9F1C;        /* Safety Orange */
+  
+  /* Text */
+  --foreground: #FFFFFF;       
+  --muted: #94A3B8;            /* Blue-ish Gray for better contrast on violet */
+
+  /* --- FONTS --- */
+  --font-sans: 'Inter', sans-serif;         
+  --font-display: 'Montserrat', sans-serif; 
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-card: var(--card);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-muted: var(--muted);
+  
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  /* Adds a subtle grain to blend images better */
+  background-image: radial-gradient(circle at 50% 0%, #1a1a3a 0%, #0B0B15 70%); 
+}
+
+h1, h2, h3, h4, h5, h6, button, .btn {
+  font-family: var(--font-display);
 }
