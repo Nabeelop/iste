@@ -7,7 +7,7 @@ import { MdEmail } from "react-icons/md";
 const Footer = () => {
   return (
 
-    <div className='w-full flex bg-[#1e1e3a] flex-col items-center'>
+    <div className='w-full flex bg-background flex-col items-center'>
         <div className='w-[80%] flex justify-between gap-10'>
             <div className="h-64 w-64 relative">
             <Image 
@@ -20,11 +20,11 @@ const Footer = () => {
             </div>
             <div className='mt-12'>
                 <p>Quick Access</p>
-                <div className='flex text-base underline mt-4 gap-0.5 text-gray-400 flex-col'>
-                    <p>Home</p>
-                    <p>About</p>
-                    <p>Sigs</p>
-                    <p>Events</p>
+                <div className='flex text-base mt-4 gap-0.5 text-gray-400 flex-col'>
+                    <a href='#home' className='hover:text-primary'>Home</a>
+                    <a href='#about' className='hover:text-primary'>About</a>
+                    <a href='#sigs' className='hover:text-primary'>Sigs</a>
+                    <a href='#events' className='hover:text-primary'>Events</a>
                     <p>Members</p>
                 </div>
 

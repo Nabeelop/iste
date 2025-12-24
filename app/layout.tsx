@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import NavBar from "@/components/NavBar";
+import ParticlesBackground from "@/components/ParticlesBackground";
 
 
 export const metadata: Metadata = {
@@ -17,9 +18,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body>
-        <NavBar/>
+        <ParticlesBackground />
+        <NavBar />
         {children}
       </body>
     </html>

@@ -1,35 +1,20 @@
 "use client";
 import Footer from "@/components/Footer";
 import LiquidEther from "@/components/LiquidEther";
+import About from "@/components/About";
 import { SigCard } from "@/components/SigCard";
-import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="bg-background min-h-screen">
+    <main className="min-h-screen">
     
-      <section id="home" className="h-screen flex items-center justify-center border-b border-white/5">
-        {/* <div className="absolute inset-0 ">
-          <LiquidEther
-            colors={[ '#00E5FF', '#00E5FF', '#00E5FF' ]}
-          />
-        </div> */}
+      <section id="home" className="h-screen flex items-center justify-center">
         <h1 className="relative z-10 text-8xl font-display font-bold text-white">
           Welcome to <span className="text-primary">ISTE NITK</span>
         </h1>
       </section>
 
-      <section id="about" className="py-24 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold font-display text-white mb-4">
-            About <span className="text-primary">ISTE NITK</span>
-          </h2>
-          <p className="text-muted mt-4">
-            ISTE NITK is the student chapter of the Indian Society for Technical Education at the National Institute of Technology Karnataka.
-             We are dedicated to fostering technical knowledge, innovation, and professional development among students through various activities, workshops, and events.
-          </p>
-        </div>
-      </section>  
+      <About />
 
       <section id="sigs" className="py-24 px-6 relative">
         
@@ -63,12 +48,6 @@ export default function Home() {
           <p className="text-muted mt-4">
             Stay tuned for our upcoming events and workshops designed to enhance your technical skills and knowledge.
           </p>
-        </div>
-      </section>
-
-      <section id="contact" className="py-24 px-6">
-        <div className="max-w-7xl mx-auto grid grid-cols-4 gap-16"> 
-          
         </div>
       </section>
 

@@ -30,11 +30,11 @@ export default function NavBar() {
         </Link>
 
         <div className="font-sans text-sm font-semibold gap-6 flex">
-          <Link href="/" className="hover:text-primary transition-colors">Home</Link>
-          <Link href="#about" className="hover:text-primary transition-colors">About</Link>
-          <Link href="#sigs" className="hover:text-primary transition-colors">SIGs</Link>
-          <Link href="#events" className="hover:text-primary transition-colors">Events</Link>
-          <Link href="#contact" className="hover:text-primary transition-colors">Contact</Link>
+          <a href="#home" className="hover:text-primary transition-colors">Home</a>
+          <a href="#about" className="hover:text-primary transition-colors">About</a>
+          <a href="#sigs" className="hover:text-primary transition-colors">SIGs</a>
+          <a href="#events" className="hover:text-primary transition-colors">Events</a>
+          <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
         </div>
       </div>
     </div>
