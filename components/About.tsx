@@ -9,7 +9,9 @@ export default function About() {
             <p className="text-xl text-muted border-l-4 border-primary pl-4">ISTE NITK is the student chapter of the Indian Society for Technical Education at the National Institute of Technology Karnataka.
                 We are dedicated to fostering technical knowledge, innovation, and professional development among students through various activities, workshops, and events.</p>
         </div>
-        <Image src="/download (1).png" alt="ISTE" width={100} height={100} className="w-[38%]" />
+        <div>
+          <Image src="/download (1).png" alt="ISTE" width={450} height={450} className="" />
+        </div>
       </div>
   
       <div className="flex items-center justify-start gap-16">
