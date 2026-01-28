@@ -1,16 +1,18 @@
 "use client";
 import About from "@/components/About";
+import EventCard, { Normalevent } from "@/components/EventCard";
 import { SigCard } from "@/components/SigCard";
-import {sigs} from "@/components/data";
+import {Events, sigs} from "@/components/data";
 
 export default function Home() {
   return (
     <main className="min-h-screen">
     
-      <section id="home" className="h-screen flex items-center justify-center">
+      <section id="home" className="h-screen flex items-center justify-center flex-col gap-10">
         <h1 className="relative z-10 text-8xl font-display font-bold text-white">
-          Welcome to <span className="text-primary">ISTE NITK</span>
+          Welcome to <span className="image-text">ISTE NITK</span>
         </h1>
+        <h1 className="text-xl">Where <span className="text-[#d32c02]">creativity</span> meets <span className="text-[#d32c02]">technology</span></h1>
       </section>
 
       <About />
@@ -44,6 +46,13 @@ export default function Home() {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-bold font-display text-white mb-4">
             Upcoming <span className="text-primary">Events</span>
+            {/* <div>
+              {
+                Events.map((event: Normalevent, index) => (<div key={index}>
+                  <EventCard eventDetails={event}/>
+                </div>))
+              }
+            </div> */}
           </h2>
           <p className="text-muted mt-4">
             Stay tuned for our upcoming events and workshops designed to enhance your technical skills and knowledge.

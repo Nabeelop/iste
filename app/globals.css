@@ -58,3 +58,16 @@ body {
 h1, h2, h3, h4, h5, h6, button, .btn {
   font-family: var(--font-display);
 }
+
+.image-text {
+  font-size: 96px;
+  font-weight: 800;
+
+  background-image: url("/galaxy.jpg");
+  background-size: cover;
+  background-position: center;
+
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text; /* required for Chrome/Safari */
+}

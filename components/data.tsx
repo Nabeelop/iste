@@ -1,3 +1,4 @@
+import { Normalevent } from "./EventCard";
 import { Member } from "./MemberCard";
 
 export const adminCore: Member[] = [
@@ -7,13 +8,6 @@ export const adminCore: Member[] = [
     post: "Convenor",
     image: "/assets/6971171731.jpeg",
     linkedin: "https://www.linkedin.com/in/likithm29"
-  },
-  {
-    name: "Jeevotthama Shenoy",
-    sig: "Admin Core",
-    post: "Club Affairs Coordinator",
-    image: "/assets/4645352874.jpg",
-    linkedin: "https://www.linkedin.com/in/jeevottham-shenoy/"
   },
   {
     name: "Linisha",
@@ -49,6 +43,13 @@ export const adminCore: Member[] = [
     post: "Chief Coordinator",
     image: "/assets/6342809027.jpg",
     linkedin: "https://linkedin.com/in/anjana-t-k"
+  }, 
+  {
+    name: "Jeevotthama Shenoy",
+    sig: "Admin Core",
+    post: "Club Affairs Coordinator",
+    image: "/assets/4645352874.jpg",
+    linkedin: "https://www.linkedin.com/in/jeevottham-shenoy/"
   }
 ]
 
@@ -60,12 +61,33 @@ export const executiveCore: Member[] = [
     image: "/assets/6160664820.jpg",
     linkedin: "https://www.linkedin.com/in/rupesh-kumar-thatavarthi-779087272/"
   },
+   {
+    name: "P Deepika",
+    sig: "Executive Core",
+    post: "Crypt SIG Head",
+    image: "/assets/5957596517.jpeg",
+    linkedin: "http://linkedin.com/in/p-devi-deepika"
+  },
+  {
+    name: "Suveena Sadashiv",
+    sig: "Executive Core",
+    post: "Crypt SIG Head",
+    image: "https://media.licdn.com/dms/image/v2/D5603AQGgFkUyOGQlcQ/profile-displayphoto-shrink_800_800/B56ZavKqFJGsAg-/0/1746695533581?e=1771459200&v=beta&t=boKIvfjVQBGPUKgMSSisGuy84-xkZoHomrCpaxCCk_c",
+    linkedin: "https://www.linkedin.com/in/suveena-sadashiv-73560b297/"
+  },
   {
     name: "Sahil Hinwani",
     sig: "Executive Core",
     post: "Chronicle SIG Head",
     image: "/assets/4911319063.jpg",
     linkedin: "https://www.linkedin.com/in/sahilhinwani"
+  },
+  {
+    name: "Nisarg Rajdeep",
+    sig: "Executive Core",
+    post: "Chronicle SIG Head",
+    image: "https://media.licdn.com/dms/image/v2/D4D03AQFfVA02xQgcnQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1713370526550?e=1771459200&v=beta&t=3jx6diAXo4gfXhrs0eqii-rhurmOyuKZT6Sy9kv2lNk",
+    linkedin: "https://www.linkedin.com/in/nisarg-rajdeep-4608a8276/"
   },
   {
     name: "Priyanshu Kumar",
@@ -82,12 +104,56 @@ export const executiveCore: Member[] = [
     linkedin: "https://www.linkedin.com/in/rashmi-k-murthy/"
   },
   {
-    name: "P Deepika",
+    name: "Divyanshu Ratnakar",
     sig: "Executive Core",
-    post: "Crypt SIG Head",
-    image: "/assets/5957596517.jpeg",
-    linkedin: "http://linkedin.com/in/p-devi-deepika"
-  }
+    post: "Catalyst SIG Head",
+    image: "https://media.licdn.com/dms/image/v2/D5603AQGZa1yXkWZe3Q/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1729502450975?e=1771459200&v=beta&t=fSYRgNL34_Ma0_1A8wsjbIf2FKQLgMDOhRzGtBuLWxc",
+    linkedin: "https://www.linkedin.com/in/divyanshu-ratnakar-863550297/"
+  },
+  {
+    name: "nikhitha mathew",
+    sig: "Executive Core",
+    post: "Charge SIG Head",
+    image: "",
+    linkedin: "https://www.linkedin.com/in/nikhitha-mathew-6135aa305/"
+  },
+  {
+    name: "Pallavi Parage",
+    sig: "Executive Core",
+    post: "Charge SIG Head",
+    image: "https://media.licdn.com/dms/image/v2/D5603AQGjE8m3J7lpMw/profile-displayphoto-crop_800_800/B56ZtW0I17JMAI-/0/1766688070800?e=1771459200&v=beta&t=3LWeNlZhfBBcwMenpns-Eim2HeIPzj2ZplUaCCc2jjg",
+    linkedin: "https://www.linkedin.com/in/pallavi-parage-32a1b0279/"
+  },
+  {
+    name: "poorva bhagwat",
+    sig: "Executive Core",
+    post: "Credit SIG Head",
+    image: "https://media.licdn.com/dms/image/v2/D4D03AQFekEJEKMkJCg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1724442199387?e=1771459200&v=beta&t=Tf4g3oH-jDXefkBpwg3sahBj6j_Us_TiHfYQZRXd-Yc",
+    linkedin: "https://www.linkedin.com/in/poorva-bhagwat/"
+  },
+  {
+    name: "T Sattwika",
+    sig: "Executive Core",
+    post: "Concrete SIG Head",
+    image: "",
+    linkedin: "https://www.linkedin.com/in/poorva-bhagwat/"
+  },
+  {
+    name: "Shambavi Jha",
+    sig: "Executive Core",
+    post: "Concrete SIG Head",
+    image: "https://media.licdn.com/dms/image/v2/D4E03AQFgC-PrZdesVw/profile-displayphoto-crop_800_800/B4EZjHfFk8HEAI-/0/1755693473556?e=1771459200&v=beta&t=nozq-wBLLGwExY0rVBD7CYew6Si5eDhYqWWvmp56lzo",
+    linkedin: "https://www.linkedin.com/in/shambavi-jha-01892b2ab/?originalSubdomain=in"
+  },
+   {
+    name: "TS Ajay",
+    sig: "Executive Core",
+    post: "Clutch SIG Head",
+    image: "https://media.licdn.com/dms/image/v2/D4E03AQFgC-PrZdesVw/profile-displayphoto-crop_800_800/B4EZjHfFk8HEAI-/0/1755693473556?e=1771459200&v=beta&t=nozq-wBLLGwExY0rVBD7CYew6Si5eDhYqWWvmp56lzo",
+    linkedin: "https://www.linkedin.com/in/ts-ajay-481119253/"
+  },
+
+ 
 ]
 export const auxCore: Member[] = [
   {
@@ -96,6 +162,28 @@ export const auxCore: Member[] = [
     post: "SHE Head",
     image: "/assets/7640404043.jpeg",
     linkedin: "http://linkedin.com/in/jeevakv"
+  },
+  
+  {
+    name: "Adhil Ali",
+    sig: "Aux Core",
+    post: "Event Affairs Secretary",
+    image: "https://media.licdn.com/dms/image/v2/D5603AQFj4UfoafNfvg/profile-displayphoto-crop_800_800/B56ZnXcYEYJYAI-/0/1760256166618?e=1771459200&v=beta&t=CAP4n366Utse5jf0jZpoFEWCQFOioAzdZSR0QtznBfA",
+    linkedin: "https://www.linkedin.com/in/adhil-ali-550164340/?originalSubdomain=in"
+  },
+  {
+    name: "Amulya Kommidi",
+    sig: "Aux Core",
+    post: "Publicity Coordinator",
+    image: "https://media.licdn.com/dms/image/v2/D5603AQHRL5vM7bQYtw/profile-displayphoto-crop_800_800/B56ZpNQ3G5HkAI-/0/1762232860797?e=1771459200&v=beta&t=0ofi_dS8LuhQ_eQ422rvh_e7PMUUUQajsJ5DpO_cAOE",
+    linkedin: "https://www.linkedin.com/in/amulyakommidi/"
+  },
+  {
+    name: "Harsh Revar",
+    sig: "Aux Core",
+    post: "Publicity Coordinator",
+    image: "",
+    linkedin: "https://www.linkedin.com/in/revar-harsh-b6816035b/"
   },
   {
     name: "Tanush A R",
@@ -112,6 +200,13 @@ export const auxCore: Member[] = [
     linkedin: "https://linkedin.com/in/pmithulsourav"
   },
   {
+    name: "Hriday Jain",
+    sig: "Aux Core",
+    post: "Credit Sig Coordinator",
+    image: "https://media.licdn.com/dms/image/v2/D5603AQHajkhMcdD04w/profile-displayphoto-crop_800_800/B56Zg8KbnIG0AQ-/0/1753356026237?e=1771459200&v=beta&t=S0iuhEXmKeBzfpXPHzCn7cJXWopowFK5xg_50xK6MXE",
+    linkedin: "https://www.linkedin.com/in/hriday-jain-344940287/"
+  },
+  {
     name: "Nisha K Viswanathan",
     sig: "Aux Core",
     post: "Blog Committee Head",
@@ -126,12 +221,18 @@ export const auxCore: Member[] = [
     linkedin: "https://www.linkedin.com/in/sanstuti-mishra-5b6066312"
   },
   {
-    name: "Nkenisha Ishwar",
+    name: "N kenisha Ishwar",
     sig: "Aux Core",
     post: "Media SIG Coordinator",
     image: "/assets/1242143286.jpg",
     linkedin: "https://www.linkedin.com/in/kenisha-ishwar-69b89027b"
-  }
+  },{
+    name: "Gulzar",
+    sig: "Aux Core",
+    post: "Social Initiative Head",
+    image: "https://media.licdn.com/dms/image/v2/D5603AQGVnmAixpfocQ/profile-displayphoto-crop_800_800/B56ZgeYQu1G4AI-/0/1752856334095?e=1771459200&v=beta&t=_H5KkjAkqQPKQOmugY7oQENWwH7ADNnFaPYqQzio5zM",
+    linkedin: "https://www.linkedin.com/in/mgulzar70/"
+  },
 ]
 
 
@@ -185,3 +286,12 @@ export const sigs = [
       link: "/sigs/crypt"
     }
   ];
+
+
+export const Events: Normalevent[] = [
+  {
+    title: "Hello",
+    description: "No description",
+    image: "",
+  }
+]
