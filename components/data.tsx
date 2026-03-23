@@ -239,53 +239,110 @@ export const auxCore: Member[] = [
 export const sigs = [
     {
       title: "Catalyst",
+      slug: "catalyst",
       image: "/catalyst.jpg",
       description: "Accelerating innovation and driving breakthrough ideas in technology and research.",
       link: "/sigs/catalyst"
     },
     {
       title: "Charge",
+      slug: "charge",
       image: "/charge.jpg",
       description: "Powering the future with sustainable energy solutions and green technology.",
       link: "/sigs/charge"
     },
     {
       title: "Chronicle",
+      slug: "chronicle",
       image: "/chronicle.jpg",
       description: "Documenting stories and preserving knowledge through digital media and content creation.",
       link: "/sigs/chronicle"
     },
     {
       title: "Clutch",
+      slug: "clutch",
       image: "/clutch.jpg",
       description: "Delivering under pressure with competitive programming and problem-solving excellence.",
       link: "/sigs/clutch"
     },
     {
       title: "Concrete",
+      slug: "concrete",
       image: "/concrete.jpg",
       description: "Building strong foundations in software development and engineering practices.",
       link: "/sigs/concrete"
     },
     {
       title: "Create",
+      slug: "create",
       image: "/create.jpg",
       description: "Unleashing creativity through design, art, and innovative digital experiences.",
       link: "/sigs/create"
     },
     {
       title: "Credit",
+      slug: "credit",
       image: "/credit.jpg",
       description: "Exploring finance, blockchain, and the future of digital transactions.",
       link: "/sigs/credit"
     },
     {
       title: "Crypt",
+      slug: "crypt",
       image: "/crypt.jpg",
       description: "Mastering cybersecurity, cryptography, and protecting digital infrastructure.",
       link: "/sigs/crypt"
     }
   ];
+
+export type SigSlug = (typeof sigs)[number]["slug"];
+
+export interface Project {
+  title: string;
+  slug: string;
+  sig: SigSlug;
+  shortDescription: string;
+  description: string;
+  techStack: string[];
+  status: "Live" | "In Progress";
+  year: string;
+  coverImage: string;
+  githubUrl?: string;
+  demoUrl?: string;
+  leads: string[];
+}
+
+export const projects: Project[] = [
+  {
+    title: "Cipher Campus",
+    slug: "cipher-campus",
+    sig: "crypt",
+    shortDescription:
+      "A campus-first encryption demo tool to teach practical cryptography.",
+    description:
+      "Cipher Campus is a student project focused on making applied cryptography easy to understand. It provides secure text encryption/decryption with modern primitives, key-strength hints, and small interactive demos so beginners can learn by experimenting.",
+    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Web Crypto API"],
+    status: "In Progress",
+    year: "2026",
+    coverImage: "/crypt.jpg",
+    githubUrl: "https://github.com/istenitk/cipher-campus",
+    leads: ["Crypt SIG Team"],
+  },
+];
+
+export const getSigBySlug = (slug: string) => {
+  const normalizedSlug = slug === "chronical" ? "chronicle" : slug;
+  return sigs.find((sig) => sig.slug === normalizedSlug);
+};
+
+export const getProjectsBySig = (sigSlug: string) => {
+  const normalizedSlug = sigSlug === "chronical" ? "chronicle" : sigSlug;
+  return projects.filter((project) => project.sig === normalizedSlug);
+};
+
+export const getProjectBySlug = (slug: string) => {
+  return projects.find((project) => project.slug === slug);
+};
 
 
 export const Events: Normalevent[] = [

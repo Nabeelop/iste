@@ -30,12 +30,21 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
-
 # vercel
 .vercel
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# strapi cms (nested app)
+cms/node_modules/
+cms/.cache/
+cms/build/
+cms/dist/
+cms/.tmp/
+cms/.strapi-updater.json
+cms/.xdg/
+cms/database/*.sqlite
+cms/database/*.sqlite-shm
+cms/database/*.sqlite-wal
