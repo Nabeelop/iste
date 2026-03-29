@@ -287,11 +287,23 @@ export const sigs = [
     }
   ];
 
-
 export const Events: Normalevent[] = [
   {
-    title: "Hello",
-    description: "No description",
-    image: "",
+    title: "Scotland Yard",
+    description: "Fast-paced, team-based adventure inspired by Scotland Yard, where the campus becomes a game board of clues, challenges, and strategic movement. Teams navigate locations, solve puzzles, and complete tasks, making quick decisions under pressure. It blends exploration, teamwork, and problem-solving into an engaging race to the finish.",
+    image: "/scotland_yard.jpeg",
+    link: "/events/scotland-yard" // Added internal link placeholder
+  },
+  {
+    title: "SquareOne",
+    description: "A creative puzzle-solving challenge where teams work together to decode mysteries and unlock solutions. Starting from basic clues, participants progress through increasingly complex puzzles that require logical thinking, collaboration, and out-of-the-box problem-solving. The ultimate goal is to piece together the final revelation before time runs out.",
+    image: "/square_one.jpeg",
+    link: "/events/square-one" // Added internal link placeholder
+  },
+  {
+    title: "Transcend",
+    description: "An immersive experience designed to push boundaries and inspire innovation. Participants engage in challenges that transcend traditional thinking, combining elements of strategy, creativity, and teamwork. This event encourages participants to break barriers, collaborate across teams, and discover new perspectives through engaging and thought-provoking activities.",
+    image: "/transcend.png",
+    link: "/events/transcend" // Added internal link placeholder
   }
 ]
