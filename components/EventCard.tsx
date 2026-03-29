@@ -5,10 +5,6 @@ export interface Normalevent {
   title: string
   image: string | null
   description: string
-<<<<<<< HEAD
-  link?: string // Added link property for redirection
-=======
->>>>>>> 12780d9c685535fc45236143eb5c584038296f50
 }
 
 const EventCard = ({eventDetails}: {eventDetails: Normalevent}) => {

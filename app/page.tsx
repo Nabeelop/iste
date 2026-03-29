@@ -3,10 +3,6 @@ import About from "@/components/About";
 import EventCard, { Normalevent } from "@/components/EventCard";
 import { SigCard } from "@/components/SigCard";
 import {Events, sigs} from "@/components/data";
-<<<<<<< HEAD
-import OrbitalEvents from "@/components/OrbitalEvents";
-=======
->>>>>>> 12780d9c685535fc45236143eb5c584038296f50
 
 export default function Home() {
   return (
@@ -47,9 +43,6 @@ export default function Home() {
       </section>
 
       <section id="events" className="py-24 px-6">
-<<<<<<< HEAD
-        <OrbitalEvents />
-=======
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-bold font-display text-white mb-4">
             Upcoming <span className="text-primary">Events</span>
@@ -65,7 +58,6 @@ export default function Home() {
             Stay tuned for our upcoming events and workshops designed to enhance your technical skills and knowledge.
           </p>
         </div>
->>>>>>> 12780d9c685535fc45236143eb5c584038296f50
       </section>
     </main>
   );
