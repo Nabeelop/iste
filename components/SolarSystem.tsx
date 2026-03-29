@@ -26,7 +26,7 @@ const SolarSystem = () => {
       id: 0,
       title: Events[0].title,
       description: Events[0].description,
-      radius: 180,
+      radius: 200,
       speed: 20,
       image: Events[0].image || '/scotland_yard.jpeg',
       link: Events[0].link || '/events/scotland-yard'
@@ -35,7 +35,7 @@ const SolarSystem = () => {
       id: 1,
       title: Events[1].title,
       description: Events[1].description,
-      radius: 250,
+      radius: 360,
       speed: 28,
       image: Events[1].image || '/square_one.jpeg',
       link: Events[1].link || '/events/square-one'
@@ -44,7 +44,7 @@ const SolarSystem = () => {
       id: 2,
       title: Events[2].title,
       description: Events[2].description,
-      radius: 320,
+      radius: 520,
       speed: 36,
       image: Events[2].image || '/transcend.png',
       link: Events[2].link || '/events/transcend'
@@ -83,19 +83,19 @@ const SolarSystem = () => {
     <div className="w-full min-h-screen flex items-center justify-center relative bg-background overflow-hidden py-16">
       <style>{`
         @keyframes orbit-0 {
-          from { transform: rotate(0deg) translateX(200px) rotate(0deg); }
-          to { transform: rotate(360deg) translateX(200px) rotate(-360deg); }
-        }
+  from { transform: rotate(0deg) translateX(200px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(200px) rotate(-360deg); }
+}
 
-        @keyframes orbit-1 {
-          from { transform: rotate(0deg) translateX(300px) rotate(0deg); }
-          to { transform: rotate(360deg) translateX(300px) rotate(-360deg); }
-        }
+@keyframes orbit-1 {
+  from { transform: rotate(120deg) translateX(360px) rotate(-120deg); }
+  to { transform: rotate(480deg) translateX(360px) rotate(-480deg); }
+}
 
-        @keyframes orbit-2 {
-          from { transform: rotate(0deg) translateX(400px) rotate(0deg); }
-          to { transform: rotate(360deg) translateX(400px) rotate(-360deg); }
-        }
+@keyframes orbit-2 {
+  from { transform: rotate(240deg) translateX(520px) rotate(-240deg); }
+  to { transform: rotate(600deg) translateX(520px) rotate(-600deg); }
+}
 
         @keyframes pulse-glow {
           0%, 100% { box-shadow: 0 0 20px rgba(0, 229, 255, 0.4), inset 0 0 20px rgba(0, 229, 255, 0.1); }
@@ -154,7 +154,7 @@ const SolarSystem = () => {
         }
 
         .starfield {
-          position: fixed;
+          position: absolute;
           top: 0;
           left: 0;
           width: 100%;
@@ -198,8 +198,8 @@ const SolarSystem = () => {
 
         .orbital-container {
           position: relative;
-          width: 850px;
-          height: 850px;
+        width: 1100px; 
+  height: 1100px;
           margin: 0 auto;
           perspective: 1200px;
           transform-style: preserve-3d;
@@ -239,8 +239,8 @@ const SolarSystem = () => {
         }
 
         .orbit-ring-1 { width: 400px; height: 400px; }
-        .orbit-ring-2 { width: 600px; height: 600px; }
-        .orbit-ring-3 { width: 800px; height: 800px; }
+.orbit-ring-2 { width: 720px; height: 720px; }
+.orbit-ring-3 { width: 1040px; height: 1040px; }
 
         .sun {
           position: absolute;
@@ -275,23 +275,16 @@ const SolarSystem = () => {
           width: 0;
           height: 0;
           transition: animation-play-state 0.2s linear;
+          will-change: transform;
         }
 
         .planet-container:hover { animation-play-state: paused; }
 
         .orbital-container.paused .planet-container { animation-play-state: paused; }
 
-        .planet-orbit-0 {
-          animation: orbit-0 20s linear infinite;
-        }
-
-        .planet-orbit-1 {
-          animation: orbit-1 28s linear infinite;
-        }
-
-        .planet-orbit-2 {
-          animation: orbit-2 36s linear infinite;
-        }
+    .planet-orbit-0 { animation: orbit-0 40s linear infinite; } 
+.planet-orbit-1 { animation: orbit-1 55s linear infinite; }
+.planet-orbit-2 { animation: orbit-2 70s linear infinite; }
 
         .planet {
           position: absolute;
@@ -419,7 +412,7 @@ const SolarSystem = () => {
       `}</style>
 
       <div className="starfield">
-        {Array.from({ length: 300 }).map((_, i) => {
+        {Array.from({ length: 150 }).map((_, i) => {
           const colors = [
             'rgba(255, 255, 255, 1)',
             'rgba(150, 200, 255, 0.95)',
@@ -447,7 +440,7 @@ const SolarSystem = () => {
           )
         })}
 
-        {Array.from({ length: 100 }).map((_, i) => {
+        {Array.from({ length: 30}).map((_, i) => {
           const gradients = [
             `radial-gradient(circle, rgba(255,255,255,${Math.random() * 0.9 + 0.5}) 0%, rgba(255,255,255,0.15) 35%, rgba(0,0,0,0) 60%)`,
             `radial-gradient(circle, rgba(0,229,255,${Math.random() * 0.85 + 0.4}) 0%, rgba(0,229,255,0.12) 35%, rgba(0,0,0,0) 60%)`,
