@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import NavBar from "@/components/NavBar";
-import ParticlesBackground from "@/components/ParticlesBackground";
-import Footer from "@/components/Footer";
+import RouteChrome from "@/components/RouteChrome";
 
 
 export const metadata: Metadata = {
@@ -18,10 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body>
-        <ParticlesBackground />
-        <NavBar />
-        {children}
-        <Footer/>
+        <RouteChrome>{children}</RouteChrome>
       </body>
     </html>
   );
