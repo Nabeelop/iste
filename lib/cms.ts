@@ -6,6 +6,10 @@ import {
   projects,
   sigs,
 } from "@/components/data";
+import {
+  type ProjectStructuredDetail,
+  getProjectDetailBySlug,
+} from "@/components/project-details";
 
 export type Sig = (typeof sigs)[number];
 
@@ -23,6 +27,10 @@ export const getProjectsForSig = async (sigSlug: string): Promise<Project[]> => 
 
 export const getSingleProject = async (slug: string): Promise<Project | undefined> =>
   getProjectBySlug(slug);
+
+export const getProjectDetail = async (
+  slug: string
+): Promise<ProjectStructuredDetail | undefined> => getProjectDetailBySlug(slug);
 
 export const getSingleSig = async (slug: string): Promise<Sig | undefined> => {
   const normalized = normalizeSigSlug(slug);

@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { ProjectGrid } from "@/components/projects/ProjectGrid";
 import { getAllSigs, getProjectsForSig } from "@/lib/cms";
 import { getSigTemplateStyle } from "@/lib/project-templates";
 import { cn } from "@/lib/utils";
@@ -67,58 +67,7 @@ export default async function ProjectsPage() {
                 </Link>
               </div>
 
-              {projects.length === 0 ? (
-                <div className="rounded-2xl border border-dashed border-white/20 bg-card/70 p-6">
-                  <p className="text-sm text-muted">
-                    No projects added yet for {sig.title}.
-                  </p>
-                </div>
-              ) : (
-                <div className="grid gap-6 md:grid-cols-2">
-                  {projects.map((project) => (
-                    <article
-                      key={project.slug}
-                      className={cn(
-                        "group overflow-hidden rounded-2xl border bg-card/90 transition-all duration-300 hover:-translate-y-1",
-                        style.cardBorder,
-                        style.hoverBorder
-                      )}
-                    >
-                      <div className="relative h-44 w-full overflow-hidden">
-                        <Image
-                          src={project.coverImage}
-                          alt={project.title}
-                          fill
-                          className="object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                      </div>
-                      <div className="p-5">
-                        <div className="mb-2 flex items-center gap-2">
-                          <span className={cn("rounded-full border px-3 py-1 text-xs font-semibold", style.statusChip)}>
-                            {project.status}
-                          </span>
-                          <span className="text-xs text-muted">{project.year}</span>
-                        </div>
-                        <h3 className="text-lg font-bold text-white">
-                          {project.title}
-                        </h3>
-                        <p className="mt-2 text-sm text-muted">
-                          {project.shortDescription}
-                        </p>
-                        <Link
-                          href={`/projects/${project.slug}`}
-                          className={cn(
-                            "mt-4 inline-flex rounded-full border px-4 py-2 text-sm font-semibold transition-colors",
-                            style.button
-                          )}
-                        >
-                          View Project
-                        </Link>
-                      </div>
-                    </article>
-                  ))}
-                </div>
-              )}
+              <ProjectGrid projects={projects} sigTitle={sig.title} style={style} />
             </div>
           );
         })}
