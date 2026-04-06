@@ -303,6 +303,552 @@ export const sigs = [
     }
   ];
 
+// Backward-compatible aliases for older imports used in some branches.
+export const projectTemplate = sigs.map((sig) => sig.projectTemplate);
+export const projectTemplates = projectTemplate;
+export const localSigs = sigs;
+
+export type SigSlug = (typeof sigs)[number]["slug"];
+
+export interface Project {
+  title: string;
+  slug: string;
+  sig: SigSlug;
+  shortDescription: string;
+  description: string;
+  techStack: string[];
+  status: "Live" | "In Progress";
+  year: string;
+  coverImage: string;
+  githubUrl?: string;
+  demoUrl?: string;
+  leads: string[];
+}
+
+export const projects: Project[] = [
+  {
+    title: "Saline Beacon",
+    slug: "saline-beacon",
+    sig: "catalyst",
+    shortDescription:
+      "A portable saltwater-powered lamp for off-grid and emergency lighting.",
+    description:
+      "Saline Beacon delivers safe, low-cost lighting using saltwater cells. The project focuses on efficient electrode selection, rugged enclosure design, and long runtime under real-world conditions.",
+    techStack: ["Electrochemistry", "Circuit Design", "Prototyping"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/catalyst.jpg",
+    leads: ["Jonathan James", "Adhil Ali", "Ivine Binu"],
+  },
+  {
+    title: "Real-Time Health Monitoring Using PINN + Hypernetwork",
+    slug: "real-time-health-monitoring-pinn-hypernetwork",
+    sig: "catalyst",
+    shortDescription:
+      "A digital-twin pipeline that predicts heat exchanger health in real time.",
+    description:
+      "This project builds a Physics-Informed Neural Network with a hypernetwork to estimate internal temperature fields from live boundary data, enabling predictive maintenance and early fouling detection.",
+    techStack: ["Python", "JAX", "DeepXDE", "PINNs"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/catalyst.jpg",
+    leads: ["Rohit Singh", "Yash Jain", "Neha Ojha"],
+  },
+  {
+    title: "Waste Heat Recovery via Organic Rankine Cycle",
+    slug: "waste-heat-recovery-orc",
+    sig: "catalyst",
+    shortDescription:
+      "Process simulation of ORC systems for industrial waste heat recovery.",
+    description:
+      "The team models industrial heat streams and designs a DWSIM-based ORC to recover energy efficiently, pairing it with techno-economic analysis to validate feasibility.",
+    techStack: ["DWSIM", "Process Simulation", "Techno-Economic Analysis"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/catalyst.jpg",
+    leads: ["Sanjo Kedavath", "Dathu Vikas", "Shubhank Hiremath"],
+  },
+  {
+    title: "Real-Time AI and CFD Hazard Detection System",
+    slug: "real-time-ai-cfd-hazard-detection",
+    sig: "catalyst",
+    shortDescription:
+      "A proactive hazard detection system combining CFD data with AI models.",
+    description:
+      "This pipeline trains ML models on CFD simulations to detect anomalies early, trigger alerts, and visualize hazard propagation in a real-time dashboard.",
+    techStack: ["ANSYS", "Python", "Streamlit", "Machine Learning"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/catalyst.jpg",
+    leads: ["Kshama Rai", "Garima Yadav", "Shanul Haque"],
+  },
+  {
+    title: "Autonomous Navigation Robot",
+    slug: "autonomous-navigation-robot",
+    sig: "charge",
+    shortDescription:
+      "A LiDAR SLAM robot for indoor mapping, localization, and navigation.",
+    description:
+      "The robot fuses LiDAR, encoder, and IMU data using EKF to build maps, plan paths, and avoid obstacles in unknown indoor environments.",
+    techStack: ["ROS", "LiDAR", "EKF", "Raspberry Pi"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/charge.jpg",
+    leads: ["Kaif", "Nisha", "Venkatesh"],
+  },
+  {
+    title: "Gesture-Controlled Bluetooth Speaker",
+    slug: "gesture-controlled-bluetooth-speaker",
+    sig: "charge",
+    shortDescription:
+      "A touch-free speaker controlled by hand gestures and on-device ML.",
+    description:
+      "The project uses an ESP32-CAM and lightweight vision models to detect gestures and control playback via Bluetooth AVRCP commands.",
+    techStack: ["ESP32-CAM", "TensorFlow Lite", "Edge Impulse", "Bluetooth"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/charge.jpg",
+    leads: ["Vinay", "Mahadev", "Shreesha"],
+  },
+  {
+    title: "RISC-V Multicore Processor",
+    slug: "risc-v-multicore-processor",
+    sig: "charge",
+    shortDescription:
+      "A Verilog-based multicore RISC-V CPU with FPGA prototyping.",
+    description:
+      "This project implements a pipelined multicore RISC-V design with FPU support, hazard handling, and UART-based FPGA testing.",
+    techStack: ["Verilog", "RISC-V", "FPGA", "UART"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/charge.jpg",
+    leads: ["Vaishnav K", "Sowmith"],
+  },
+  {
+    title: "Offline Speech-to-Speech Translator on FPGA",
+    slug: "offline-speech-to-speech-translator-fpga",
+    sig: "charge",
+    shortDescription:
+      "An FPGA + MCU pipeline for offline speech translation.",
+    description:
+      "The system performs DSP on FPGA and ML-based ASR/MT/TTS on an MCU to deliver low-latency speech translation without cloud dependency.",
+    techStack: ["FPGA", "DSP", "Embedded ML", "MCU"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/charge.jpg",
+    leads: ["Kshitij", "Hafiz", "Manan"],
+  },
+  {
+    title: "AES-256 Encryption System",
+    slug: "aes-256-encryption-system",
+    sig: "charge",
+    shortDescription:
+      "A from-scratch AES-256 implementation with a CLI encryption tool.",
+    description:
+      "Students implement AES-256 core transformations, key expansion, and verification against standard libraries to build a functional encryption tool.",
+    techStack: ["Python", "Cryptography", "CLI"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/charge.jpg",
+    leads: ["Vishal", "Nitish", "Rishi"],
+  },
+  {
+    title: "A Day in the Life",
+    slug: "a-day-in-the-life",
+    sig: "chronicle",
+    shortDescription:
+      "An interactive visual novel about the everyday life of an NITK student.",
+    description:
+      "A web-based choose-your-own-adventure experience that explores student life through branching narratives and playful decision points.",
+    techStack: ["Interactive Fiction", "Web", "Storytelling"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/chronicle.jpg",
+    leads: ["Nisha", "Arjun", "Ivine"],
+  },
+  {
+    title: "Feud Escape",
+    slug: "feud-escape",
+    sig: "chronicle",
+    shortDescription:
+      "A high-energy event blending a Family Feud round with an escape room.",
+    description:
+      "Participants gain time advantages through quiz rounds and then solve collaborative puzzles, giving juniors hands-on experience in event design and execution.",
+    techStack: ["Event Design", "Game Mechanics", "Experience Design"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/chronicle.jpg",
+    leads: ["Aaryan", "Sahitya", "Johan"],
+  },
+  {
+    title: "ISTEVERSE Sequel",
+    slug: "isteverse-sequel",
+    sig: "chronicle",
+    shortDescription:
+      "An AI-assisted visual comic promoting the eight ISTE SIG identities.",
+    description:
+      "The project uses AI art tools and narrative design to build a visual comic that highlights SIG mascots and promotes club unity.",
+    techStack: ["AI Art", "Storytelling", "Canva"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/chronicle.jpg",
+    leads: ["Hima", "Yash", "Ronak"],
+  },
+  {
+    title: "Short Film",
+    slug: "short-film",
+    sig: "chronicle",
+    shortDescription:
+      "A 5-10 minute narrative short with full production and post work.",
+    description:
+      "Teams collaborate across storyboard, filming, lighting, sound, and post-production to deliver a festival-ready short film.",
+    techStack: ["Filmmaking", "Post-Production", "VFX"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/chronicle.jpg",
+    leads: ["Hafiz", "Chinmay", "Kaif"],
+  },
+  {
+    title: "Aircraft Bearing Bracket",
+    slug: "aircraft-bearing-bracket",
+    sig: "clutch",
+    shortDescription:
+      "Topology optimization and modal analysis for an aircraft bracket.",
+    description:
+      "A simulation-led redesign that reduces bracket weight while validating structural health through vibration analysis.",
+    techStack: ["ANSYS", "Topology Optimization", "CAD"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/clutch.jpg",
+    leads: ["Gulzaar"],
+  },
+  {
+    title: "Fire Fighting Robot",
+    slug: "fire-fighting-robot",
+    sig: "clutch",
+    shortDescription:
+      "An autonomous robot that detects fire and deploys a pump nozzle.",
+    description:
+      "The robot uses sensors and servo-driven actuation to navigate obstacles, detect flames, and extinguish fires safely.",
+    techStack: ["Arduino", "Sensors", "Robotics"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/clutch.jpg",
+    leads: ["Tejaswini", "Nitesh", "Aditya"],
+  },
+  {
+    title: "Autonomous Delivery Drone",
+    slug: "autonomous-delivery-drone",
+    sig: "clutch",
+    shortDescription:
+      "A GPS-guided quadcopter for lightweight campus deliveries.",
+    description:
+      "The project integrates Pixhawk, GPS, and onboard computing to navigate, avoid obstacles, and drop payloads safely.",
+    techStack: ["Pixhawk", "Raspberry Pi", "GPS", "ANSYS"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/clutch.jpg",
+    leads: ["Ashmit", "Srujan", "Azeem"],
+  },
+  {
+    title: "Airship",
+    slug: "airship",
+    sig: "clutch",
+    shortDescription:
+      "A helium-based indoor airship with live video streaming.",
+    description:
+      "The team designs a lighter-than-air platform with ESP32-CAM streaming, CAD-modeled structure, and controlled flight tests.",
+    techStack: ["ESP32-CAM", "CAD", "RC Systems"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/clutch.jpg",
+    leads: ["Rajitha", "Yashika", "Aditya"],
+  },
+  {
+    title: "Motogp",
+    slug: "motogp",
+    sig: "clutch",
+    shortDescription:
+      "A simulation-first MotoGP bike design using CAD and CFD.",
+    description:
+      "The project models a race bike for competition compliance, then validates performance with structural and aerodynamic analysis.",
+    techStack: ["CAD", "CFD", "FEA"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/clutch.jpg",
+    leads: ["Manoj", "Shubham", "Ruthvik"],
+  },
+  {
+    title: "Neoleg",
+    slug: "neoleg",
+    sig: "clutch",
+    shortDescription:
+      "A passive lower-limb exoskeleton for load reduction.",
+    description:
+      "A CAD and simulation driven concept that aligns with human joint biomechanics to reduce physical fatigue during tasks.",
+    techStack: ["Biomechanics", "CAD", "FEA"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/clutch.jpg",
+    leads: ["Vinay", "Shravani", "Bhoomika"],
+  },
+  {
+    title: "Pavement Condition Index Prediction Using ML",
+    slug: "pavement-condition-index-ml",
+    sig: "concrete",
+    shortDescription:
+      "A machine learning model to automate pavement condition scoring.",
+    description:
+      "The project predicts pavement condition using data-driven models to reduce manual survey effort and improve infrastructure planning.",
+    techStack: ["Python", "Machine Learning", "Data Analytics"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/concrete.jpg",
+    leads: ["Tushar"],
+  },
+  {
+    title: "Earthquake Waveform Prediction and Building Safety Assessment",
+    slug: "earthquake-waveform-prediction-building-safety-ml",
+    sig: "concrete",
+    shortDescription:
+      "Predict seismic waveforms and classify building safety with ML.",
+    description:
+      "The team builds ML models that forecast seismic signals and evaluate building safety using IS 1893 and IS 456 guidelines.",
+    techStack: ["Python", "Machine Learning", "Seismic Analysis"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/concrete.jpg",
+    leads: ["Sushanth", "Amarnath", "Charan"],
+  },
+  {
+    title: "Isolated RC Footing on Normal and Improved Soil",
+    slug: "isolated-rc-footing-improved-soil",
+    sig: "concrete",
+    shortDescription:
+      "Structural analysis of RC footings across soil conditions.",
+    description:
+      "A comparative study that evaluates settlement, bearing capacity, and design improvements using stabilized soil models.",
+    techStack: ["Structural Analysis", "Geotechnical Engineering", "IS Codes"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/concrete.jpg",
+    leads: ["Ayush", "Aarshi", "Gajendra"],
+  },
+  {
+    title: "Seismic Hazard Zonation and Cluster Analysis",
+    slug: "seismic-hazard-zonation-nw-himalaya",
+    sig: "concrete",
+    shortDescription:
+      "A hazard zonation map and clustering study for the NW Himalaya.",
+    description:
+      "The project builds a seismic hotspot map and clusters fault-sensitive regions to inform planning and mitigation strategies.",
+    techStack: ["Seismology", "GIS", "Statistical Analysis"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/concrete.jpg",
+    leads: ["Concrete SIG Team"],
+  },
+  {
+    title: "The Final Semester - A 2D Survival Game",
+    slug: "the-final-semester",
+    sig: "create",
+    shortDescription:
+      "A 2D pixel-art survival game set on a playable NITK campus.",
+    description:
+      "Built in Unity, the game features exploration, combat, stamina, and enemy AI, presenting campus locations as a survival world.",
+    techStack: ["Unity", "C#", "Pixel Art"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/create.jpg",
+    leads: ["Create SIG Team"],
+  },
+  {
+    title: "ArtIn - A No-Code Interactive Platform for Indian Art and Textiles",
+    slug: "artin-indian-art-textiles",
+    sig: "create",
+    shortDescription:
+      "A no-code interactive archive for Indian art and textiles.",
+    description:
+      "ArtIn curates art categories and delivers a responsive experience built with no-code tools, focusing on UX and digital storytelling.",
+    techStack: ["Framer", "Figma", "No-Code"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/create.jpg",
+    leads: ["Create SIG Team"],
+  },
+  {
+    title: "Escape Room - A 3D Puzzle Game",
+    slug: "escape-room-3d-puzzle-game",
+    sig: "create",
+    shortDescription:
+      "A Unity-based 3D puzzle escape room with interactive mechanics.",
+    description:
+      "Players explore rooms, solve puzzles, and unlock progress while the team develops skills in Unity, C#, and level design.",
+    techStack: ["Unity", "C#", "3D Design"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/create.jpg",
+    leads: ["Create SIG Team"],
+  },
+  {
+    title: "Industry Disruption Analysis",
+    slug: "industry-disruption-analysis",
+    sig: "credit",
+    shortDescription:
+      "A quantitative disruption index with interactive dashboards.",
+    description:
+      "This project builds a data-driven model that scores industries for disruption risk and visualizes trends via analytics dashboards.",
+    techStack: ["Power BI", "Data Modeling", "Forecasting"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/credit.jpg",
+    leads: ["Mithul", "Chethana", "Hriday"],
+  },
+  {
+    title: "Build Your Own Futuristic Stock Market Index",
+    slug: "futuristic-stock-market-index",
+    sig: "credit",
+    shortDescription:
+      "A new index tracking innovation-driven sectors with live dashboards.",
+    description:
+      "The team defines weighting rules, pulls live pricing via APIs, and builds a dashboard for index movement and comparisons.",
+    techStack: ["APIs", "Data Analysis", "Dashboarding"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/credit.jpg",
+    leads: ["Hriday Jain", "Mithul", "Aditya Jyothir"],
+  },
+  {
+    title: "AI-Powered Fintech Investment Intelligence Platform",
+    slug: "ai-powered-fintech-investment-intelligence",
+    sig: "credit",
+    shortDescription:
+      "An ML-driven platform for investment insights and portfolio analytics.",
+    description:
+      "Combines fundamentals, sentiment, and technical signals into a unified dashboard that offers recommendations and alerts.",
+    techStack: ["Python", "NLP", "Dashboards", "Machine Learning"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/credit.jpg",
+    leads: ["Shreya Nyamati", "Lalima Singh", "Abhimanyu Binu"],
+  },
+  {
+    title: "Dynamic DCF Modeling Using OU Process and Monte Carlo",
+    slug: "dynamic-dcf-modeling-ou-monte-carlo",
+    sig: "credit",
+    shortDescription:
+      "A stochastic DCF model with Monte Carlo risk analysis.",
+    description:
+      "The model simulates mean-reverting interest rates and quantifies valuation risk using thousands of Monte Carlo scenarios.",
+    techStack: ["Python", "Stochastic Modeling", "Monte Carlo"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/credit.jpg",
+    leads: ["Bhavya Saini", "Hridya Jain", "Anantha Krishnan"],
+  },
+  {
+    title: "Fundamental Analysis and Long-Term Investing Dashboard",
+    slug: "fundamental-analysis-long-term-investing-dashboard",
+    sig: "credit",
+    shortDescription:
+      "A Power BI dashboard for Nifty 500 fundamentals and valuations.",
+    description:
+      "Automates data collection with Python and presents structured financial metrics for long-term investing decisions.",
+    techStack: ["Python", "yfinance", "Power BI"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/credit.jpg",
+    leads: ["Prashanth", "Karthik", "M S S Vinay"],
+  },
+  {
+    title: "CloudFunc AI",
+    slug: "cloudfunc-ai",
+    sig: "crypt",
+    shortDescription:
+      "LLM-driven generation of serverless functions from natural language.",
+    description:
+      "CloudFunc AI transforms plain-English cloud requirements into deployable functions using RAG pipelines and templated code generation.",
+    techStack: ["RAG", "LLMs", "Jinja2", "Serverless"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/crypt.jpg",
+    leads: ["Nikhil Agarwal", "Kowndinya"],
+  },
+  {
+    title: "API Documentation Agent (LLM)",
+    slug: "api-docs-agent-llm",
+    sig: "crypt",
+    shortDescription:
+      "An agent that converts API docs into executable code snippets.",
+    description:
+      "The system ingests documentation, retrieves context with vector search, and uses LLMs to emit structured API calls and code.",
+    techStack: ["LangChain", "ChromaDB", "FastAPI", "React"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/crypt.jpg",
+    leads: ["Radhika Sharda", "Sanstuti Mishra", "Pramod Budhiraja"],
+  },
+  {
+    title: "FinSight",
+    slug: "finsight",
+    sig: "crypt",
+    shortDescription:
+      "A personal finance assistant for smarter spending insights.",
+    description:
+      "FinSight tracks expenses, extracts receipt data, and offers actionable budgeting insights through a mobile-first experience.",
+    techStack: ["Mobile App", "OCR", "Personal Finance"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/crypt.jpg",
+    leads: ["Sai Chaitanya", "Pranav Venkat", "Sai Govardhan"],
+  },
+  {
+    title: "Ethical AI (Machine Unlearning)",
+    slug: "ethical-ai-machine-unlearning",
+    sig: "crypt",
+    shortDescription:
+      "Privacy-first machine unlearning for healthcare prediction models.",
+    description:
+      "This project enables models to forget selected patient records while tracking accuracy changes under compliant data governance.",
+    techStack: ["Privacy", "Machine Learning", "Healthcare"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/crypt.jpg",
+    leads: ["Basitha", "Heemakshi", "Pranav"],
+  },
+  {
+    title: "Federated Learning for Privacy-Focused NLP",
+    slug: "federated-learning-privacy-nlp",
+    sig: "crypt",
+    shortDescription:
+      "Federated NLP system for detecting risky contract clauses.",
+    description:
+      "A federated learning pipeline trains models on local legal documents, sharing encrypted updates to preserve confidentiality.",
+    techStack: ["Federated Learning", "NLP", "Privacy"],
+    status: "In Progress",
+    year: "2025-26",
+    coverImage: "/crypt.jpg",
+    leads: ["Abhimanyu", "Chaitanya Menon", "Shreya"],
+  },
+];
+
+export const localProjects = projects;
+
+export const getSigBySlug = (slug: string) => {
+  const normalizedSlug = slug === "chronical" ? "chronicle" : slug;
+  return sigs.find((sig) => sig.slug === normalizedSlug);
+};
+
+export const getProjectsBySig = (sigSlug: string) => {
+  const normalizedSlug = sigSlug === "chronical" ? "chronicle" : sigSlug;
+  return projects.filter((project) => project.sig === normalizedSlug);
+};
+
+export const getProjectBySlug = (slug: string) => {
+  return projects.find((project) => project.slug === slug);
+};
+
+
 export const Events: Normalevent[] = [
   {
     title: "Scotland Yard",
