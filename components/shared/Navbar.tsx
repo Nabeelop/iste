@@ -11,6 +11,7 @@ export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
   const isHomePage = pathname === "/";
+  const isProjectsRoute = pathname.startsWith("/projects");
   const shouldAnimateHomeNavbar = isHomePage && !peekSkipNextHomeLoader();
 
   const navLinks = [
@@ -86,7 +87,7 @@ export const Navbar = () => {
       initial={shouldAnimateHomeNavbar ? { y: -100, opacity: 0 } : false}
       animate={{ y: 0, opacity: 1 }}
       transition={shouldAnimateHomeNavbar ? { delay: 1.6, duration: 0.6, ease: [0.22, 1, 0.36, 1] } : { duration: 0 }}
-      className="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 w-[95%] max-w-6xl z-50 rounded-3xl md:rounded-full border border-white/20 bg-white/10 backdrop-blur-md backdrop-saturate-150 shadow-[0_10px_24px_rgba(2,12,30,0.34),inset_12px_0_16px_-12px_rgba(255,255,255,0.4),inset_0_-12px_16px_-12px_rgba(255,255,255,0.32)] md:shadow-[0_12px_28px_rgba(2,12,30,0.34),inset_10px_0_14px_-12px_rgba(255,255,255,0.35),inset_0_-10px_14px_-12px_rgba(255,255,255,0.28)] pointer-events-auto"
+      className="group fixed top-4 md:top-6 left-1/2 -translate-x-1/2 w-[95%] max-w-6xl z-50 rounded-3xl md:rounded-full border border-white/20 bg-white/10 backdrop-blur-md backdrop-saturate-150 shadow-[0_10px_24px_rgba(2,12,30,0.34),inset_12px_0_16px_-12px_rgba(255,255,255,0.4),inset_0_-12px_16px_-12px_rgba(255,255,255,0.32)] md:shadow-[0_12px_28px_rgba(2,12,30,0.34),inset_10px_0_14px_-12px_rgba(255,255,255,0.35),inset_0_-10px_14px_-12px_rgba(255,255,255,0.28)] pointer-events-auto"
     >
       <div className="px-4 md:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -109,6 +110,16 @@ export const Navbar = () => {
           </div>
 
           <div className="hidden md:flex space-x-8">
+            {isProjectsRoute && (
+              <Link
+                href="/"
+                onClick={() => markSkipNextHomeLoader()}
+                className="inline-flex items-center gap-1 text-sm font-medium text-white/70 opacity-0 transition-all duration-300 group-hover:opacity-100 hover:text-teal-400"
+              >
+                <span aria-hidden="true">←</span>
+                Back
+              </Link>
+            )}
             {navLinks.map((link) => (
               <Link
                 key={link.name}
@@ -151,6 +162,18 @@ export const Navbar = () => {
             className="md:hidden px-4 pb-4"
           >
             <div className="rounded-2xl bg-black/70 border border-white/10 p-3 flex flex-col">
+              {isProjectsRoute && (
+                <Link
+                  href="/"
+                  onClick={() => {
+                    markSkipNextHomeLoader();
+                    setIsMenuOpen(false);
+                  }}
+                  className="px-4 py-3 text-sm font-medium text-white/85 hover:text-teal-400 hover:bg-white/5 rounded-xl transition-all duration-200 tracking-wide"
+                >
+                  ← Back
+                </Link>
+              )}
               {navLinks.map((link) => (
                 <Link
                   key={link.name}

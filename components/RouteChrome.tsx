@@ -16,7 +16,8 @@ export default function RouteChrome({ children }: RouteChromeProps) {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
   const isTeamPage = pathname === "/team";
-  const useSpaceThemeChrome = isHomePage || isTeamPage;
+  const isProjectsRoute = pathname.startsWith("/projects");
+  const useSpaceThemeChrome = isHomePage || isTeamPage || isProjectsRoute;
   const particleDensity = isTeamPage ? 60 : 100;
 
   if (useSpaceThemeChrome) {
