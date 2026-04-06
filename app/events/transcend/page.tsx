@@ -19,7 +19,7 @@ const DAYS = [
   { name: "17th", sub: "Watt the Hangover(Team of 4 Mandatory)", color: SLATE,     tc: "#fff" },
   { name: "18th", sub: "Harry Potter and the Cursed Water (Team of 3)",      color: R,         tc: "#fff" },
   { name: "19th", sub: "32nd Avenue(Team of 3–4)",       color: SLATE,     tc: "#fff" },
-  { name: "20th", sub: "CAD-A-THON(Team of 2–3)",        color: "#006B3C", tc: "#fff" },
+  { name: "20th", sub: "CAD-A-THON(Team of 2–4)",        color: "#006B3C", tc: "#fff" },
 ];
 
 const CSS = `
