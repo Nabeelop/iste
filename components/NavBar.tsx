@@ -36,7 +36,7 @@ export default function NavBar() {
           <Link href={"/projects"} className="hover:text-primary transition-colors">Projects</Link>
           <Link  href={"/#sigs"} className="hover:text-primary transition-colors">SIGs</Link>
           <Link href={"/team"} className="hover:text-primary transition-colors">Team</Link>
-          <Link href={"/#events"} className="hover:text-primary transition-colors">Events</Link>
+          <Link href={"/events"} className="hover:text-primary transition-colors">Events</Link>
           <Link href={"/#contact"} className="hover:text-primary transition-colors">Contact</Link>
         </div>
       </div>

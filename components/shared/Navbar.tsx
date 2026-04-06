@@ -17,7 +17,7 @@ export const Navbar = () => {
     { name: "Home", href: "#home", homeSection: true },
     { name: "SIGs", href: "#sigs", homeSection: true },
     { name: "Projects", href: "#projects", homeSection: true },
-    { name: "Events", href: "#events", homeSection: true },
+    { name: "Events", href: "/events" },
     { name: "Contact", href: "#contact" },
   ];
 
