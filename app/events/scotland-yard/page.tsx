@@ -9,7 +9,7 @@ const PAPYRUS = "#1C1000";
 const STONE = "#1E160A";
 
 const STATS = [
-  { icon: "📅", label: "Date",        value: "21 September 2025" },
+  { icon: "📅", label: "Date",        value: "21 September 2026" },
   { icon: "📍", label: "Venue",       value: "LHC A" },
   { icon: "👥", label: "Eligibility", value: "BTech First Years" },
   { icon: "🏆", label: "Prize Pool",  value: "₹7,500" },
@@ -24,15 +24,10 @@ const PILLARS = [
 
 const ROUNDS = [
   { name: "The Hall of Maat",   sub: "Gather and receive your sacred scrolls",          color: GOLD,      tc: INK    },
-  { name: "The Eye Opens",      sub: "Decode the first cipher — find the hidden path",  color: STONE,     tc: "#fff" },
-  { name: "The Duat Descent",   sub: "Navigate campus checkpoints under time pressure", color: RUST,      tc: "#fff" },
-  { name: "The Heart Weighing", sub: "Solve the final riddle — logic under fire",       color: STONE,     tc: "#fff" },
+  { name: "The Trial of Senet", sub: "Navigate campus checkpoints under time pressure", color: STONE,     tc: "#fff" },
+  { name: "The Trial of Sin",   sub: "Decode the first cipher — find the hidden path",  color: RUST,      tc: "#fff" },
+  { name: "The Trial of Souls", sub: "Solve the final riddle — logic under fire",       color: STONE,     tc: "#fff" },
   { name: "Osiris Judges",      sub: "The last team standing claims glory",             color: "#3B2200", tc: SAND   },
-];
-
-const POCS = [
-  { name: "Sahil",  phone: "9508883828" },
-  { name: "Nisarg", phone: "8866475747" },
 ];
 
 const CSS = `
@@ -443,7 +438,7 @@ export default function ScotlandYardPage() {
             <div className="inline-flex items-center gap-2 font-cinzel"
               style={{border:`1px solid rgba(200,134,10,0.4)`,padding:"6px 20px",marginBottom:28,fontSize:12,letterSpacing:4,color:SAND,borderRadius:2}}>
               <span className="anim-flicker inline-block" style={{width:6,height:6,borderRadius:"50%",background:GOLD}}/>
-              ISTE NITK · Scotland Yard 2025
+              ISTE NITK · Scotland Yard 2026
             </div>
             <div className="font-cinzel" style={{fontSize:13,letterSpacing:6,color:"rgba(232,200,122,0.55)",marginBottom:10,textTransform:"uppercase"}}>
               Scotland Yard Presents
@@ -539,23 +534,6 @@ export default function ScotlandYardPage() {
               </div>
             ))}
           </div>
-
-          {/* POC */}
-          <div style={{marginTop:48}}>
-            <div className="ornament" style={{marginBottom:28}}>Points of Contact</div>
-            <div className="flex" style={{gap:18,flexWrap:"wrap"}}>
-              {POCS.map(poc=>(
-                <div key={poc.name}
-                  style={{background:"rgba(200,134,10,0.07)",border:"1px solid rgba(200,134,10,0.15)",borderRadius:10,padding:"18px 32px",display:"flex",flexDirection:"column",gap:4}}>
-                  <div className="font-cinzel text-white" style={{fontSize:15,letterSpacing:2}}>{poc.name}</div>
-                  <div className="font-crimson" style={{fontSize:17,color:SAND}}>{poc.phone}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <HieroStrip color={STONE} glyphs={["𓁹","𓊹","𓂀","𓆣","𓅓","𓊪"]}/>
 
         {/* ── TIMELINE ── */}
         <section className="section-pad" style={{padding:"96px 80px",background:PAPYRUS,position:"relative",overflow:"hidden"}}>
