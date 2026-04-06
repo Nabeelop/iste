@@ -15,8 +15,6 @@ type ProjectCardProps = {
 };
 
 export function ProjectCard({ project, style }: ProjectCardProps) {
-  const contributors = project.leads;
-
   return (
     <article
       className={cn(
@@ -65,12 +63,6 @@ export function ProjectCard({ project, style }: ProjectCardProps) {
             </span>
           ))}
         </div>
-
-        <p className="mt-4 text-xs text-muted">
-          <span className="font-semibold text-white">Contributors:</span>{" "}
-          {contributors.slice(0, 3).join(", ")}
-          {contributors.length > 3 ? " + more" : ""}
-        </p>
 
         <div className="mt-5 flex flex-wrap items-center gap-3">
           <Link

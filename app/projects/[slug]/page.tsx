@@ -68,6 +68,18 @@ export default async function ProjectPage({
   return (
     <main className="min-h-screen px-6 pt-30 pb-16">
       <article className="mx-auto max-w-5xl">
+        <div className="mb-5">
+          <Link
+            href="/projects"
+            className={cn(
+              "inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition-colors",
+              style.button
+            )}
+          >
+            <span aria-hidden="true">←</span>
+            Back to Projects
+          </Link>
+        </div>
         <div className={cn("overflow-hidden rounded-3xl border bg-card/90", style.cardBorder)}>
           <div className="relative h-64 w-full md:h-80">
             <Image
@@ -243,16 +255,6 @@ export default async function ProjectPage({
                   <span className="font-semibold text-white">Year:</span>{" "}
                   {project.year}
                 </p>
-                <p>
-                  <span className="font-semibold text-white">Mentors:</span>{" "}
-                  {mentors.join(", ")}
-                </p>
-                {mentees.length ? (
-                  <p>
-                    <span className="font-semibold text-white">Mentees:</span>{" "}
-                    {mentees.join(", ")}
-                  </p>
-                ) : null}
                 {detail?.budget ? (
                   <p>
                     <span className="font-semibold text-white">Budget:</span>{" "}
@@ -262,6 +264,15 @@ export default async function ProjectPage({
               </div>
 
               <div className="mt-6 flex flex-col gap-3">
+                <Link
+                  href="/projects"
+                  className={cn(
+                    "rounded-full border px-4 py-2 text-center text-sm font-semibold transition-colors",
+                    style.button
+                  )}
+                >
+                  Back to Projects
+                </Link>
                 <Link
                   href={`/sigs/${project.sig}`}
                   className={cn(

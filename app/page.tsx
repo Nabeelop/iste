@@ -54,10 +54,14 @@ export default function Home() {
     };
   }, []);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
+  const { scrollYProgress } = useScroll(
+    isMobile
+      ? {}
+      : {
+          target: containerRef,
+          offset: ["start start", "end end"],
+        }
+  );
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     if (isMobile) {

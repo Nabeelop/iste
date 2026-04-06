@@ -87,7 +87,7 @@ export const Navbar = () => {
       initial={shouldAnimateHomeNavbar ? { y: -100, opacity: 0 } : false}
       animate={{ y: 0, opacity: 1 }}
       transition={shouldAnimateHomeNavbar ? { delay: 1.6, duration: 0.6, ease: [0.22, 1, 0.36, 1] } : { duration: 0 }}
-      className="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 w-[95%] max-w-6xl z-50 rounded-3xl md:rounded-full border border-white/20 bg-white/10 backdrop-blur-md backdrop-saturate-150 shadow-[0_10px_24px_rgba(2,12,30,0.34),inset_12px_0_16px_-12px_rgba(255,255,255,0.4),inset_0_-12px_16px_-12px_rgba(255,255,255,0.32)] md:shadow-[0_12px_28px_rgba(2,12,30,0.34),inset_10px_0_14px_-12px_rgba(255,255,255,0.35),inset_0_-10px_14px_-12px_rgba(255,255,255,0.28)] pointer-events-auto"
+      className="group fixed top-4 md:top-6 left-1/2 -translate-x-1/2 w-[95%] max-w-6xl z-50 rounded-3xl md:rounded-full border border-white/20 bg-white/10 backdrop-blur-md backdrop-saturate-150 shadow-[0_10px_24px_rgba(2,12,30,0.34),inset_12px_0_16px_-12px_rgba(255,255,255,0.4),inset_0_-12px_16px_-12px_rgba(255,255,255,0.32)] md:shadow-[0_12px_28px_rgba(2,12,30,0.34),inset_10px_0_14px_-12px_rgba(255,255,255,0.35),inset_0_-10px_14px_-12px_rgba(255,255,255,0.28)] pointer-events-auto"
     >
       <div className="px-4 md:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -98,6 +98,7 @@ export const Navbar = () => {
               alt="ISTE Logo"
               width={48}
               height={48}
+              style={{ width: "auto" }}
               className="h-10 sm:h-12 w-auto object-contain hover:scale-105 transition-transform duration-300"
             />
             <Image
@@ -105,6 +106,7 @@ export const Navbar = () => {
               alt="NITK Logo"
               width={48}
               height={48}
+              style={{ width: "auto" }}
               className="h-10 sm:h-12 w-auto object-contain hover:scale-105 transition-transform duration-300"
             />
           </div>
