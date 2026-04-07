@@ -104,7 +104,7 @@ export default function SquareOnePage() {
             {/* Hero Section */}
             <section className="flex items-end gap-6 mb-12">
               {/* Fake 3D Badge */}
-              <div className="w-48 h-48 md:w-56 md:h-56 rounded-lg bg-gradient-to-br from-indigo-900 via-black to-[#1DB954]/20 shadow-2xl flex items-center justify-center relative overflow-hidden group border border-white/10">
+              <div className="w-48 h-48 md:w-56 md:h-56 rounded-lg bg-linear-to-br from-indigo-900 via-black to-[#1DB954]/20 shadow-2xl flex items-center justify-center relative overflow-hidden group border border-white/10">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-30 group-hover:opacity-60 transition-opacity duration-700"></div>
                 <div className="absolute w-32 h-32 bg-[#1DB954] blur-[80px] rounded-full opacity-30 group-hover:opacity-50 transition-opacity duration-700"></div>
                 <Hexagon className="w-24 h-24 text-white drop-shadow-[0_0_15px_rgba(29,185,84,0.8)] z-10" />
@@ -112,7 +112,7 @@ export default function SquareOnePage() {
               
               <div className="flex flex-col gap-2 pb-2">
                 <span className="text-xs font-bold uppercase tracking-widest text-[#1DB954]">Featured Event</span>
-                <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/70 drop-shadow-lg" style={{ fontFamily: "Montserrat, sans-serif" }}>
+                <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-transparent bg-clip-text bg-linear-to-b from-white to-white/70 drop-shadow-lg" style={{ fontFamily: "Montserrat, sans-serif" }}>
                   Square One '26
                 </h1>
                 <p className="text-neutral-400 font-medium text-sm md:text-base mt-2 max-w-lg">
