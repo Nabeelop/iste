@@ -867,5 +867,23 @@ export const Events: Normalevent[] = [
     description: "An immersive experience designed to push boundaries and inspire innovation. Participants engage in challenges that transcend traditional thinking, combining elements of strategy, creativity, and teamwork. This event encourages participants to break barriers, collaborate across teams, and discover new perspectives through engaging and thought-provoking activities.",
     image: "/transcend.png",
     link: "/events/transcend" // Added internal link placeholder
+  },
+  {
+    title: "Fox Hunt",
+    description: "A thrilling radio-direction finding competition where participants use specialized equipment to track down hidden transmitters hidden across the campus. It's a test of navigation, signal processing, and strategic movement as teams race to find the 'fox' before time runs out.",
+    image: "/fox_hunt.png",
+    link: "/events/fox-hunt"
+  },
+  {
+    title: "Aarambh",
+    description: "ISTE's premier ideathon that brings together the brightest minds to solve pressing real-world problems. Participants brainstorm, iterate, and pitch their innovative solutions to a panel of experts. It's a platform to transform raw ideas into viable concepts and kickstart the journey of innovation.",
+    image: "/aarambh.png",
+    link: "/events/aarambh"
+  },
+  {
+    title: "Space Talk",
+    description: "An enlightening session with Angad Pratap, exploring the frontiers of space technology and exploration. Gain insights into the future of aerospace, the challenges of modern space missions, and the incredible journey of human discovery beyond Earth's atmosphere.",
+    image: "/angad-pratap.jpg",
+    link: "/events/space-talk"
   }
 ]

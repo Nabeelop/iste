@@ -534,6 +534,7 @@ export default function ScotlandYardPage() {
               </div>
             ))}
           </div>
+        </section>
 
         {/* ── TIMELINE ── */}
         <section className="section-pad" style={{padding:"96px 80px",background:PAPYRUS,position:"relative",overflow:"hidden"}}>

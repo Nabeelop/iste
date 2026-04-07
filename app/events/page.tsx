@@ -6,15 +6,15 @@ import Image from "next/image";
 import { motion } from "motion/react";
 import ParticlesBackground from "@/components/ParticlesBackground";
 import { Events } from "@/components/data";
+import { Navbar } from "@/components/shared/Navbar";
 
 export default function EventsPage() {
   return (
-    <main className="relative min-h-screen pt-32 pb-24 overflow-hidden w-full">
-      {/* Dynamic Background */}
-      <div className="absolute inset-0 z-0">
-        <ParticlesBackground />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#020812] via-transparent to-[#020812] opacity-80 pointer-events-none" />
-      </div>
+    <div className="relative w-full">
+      <Navbar />
+      <main className="relative min-h-screen pt-40 pb-24 overflow-hidden w-full">
+        {/* Gradient Overlay for content readability */}
+        <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#020812] via-transparent to-[#020812] opacity-80 pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <div className="flex flex-col items-center justify-center text-center space-y-6 mb-20">
@@ -38,15 +38,10 @@ export default function EventsPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 relative z-20">
-          {Events.map((event, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: idx * 0.2, ease: "easeOut" }}
-            >
-              <Link href={event.link || `/#events`} className="group block relative w-full h-full perspective-1000">
+          {Events.map((event, idx) => {
+            const noExplore = ['Aarambh', 'Space Talk', 'Fox Hunt'].includes(event.title);
+            
+            const cardContent = (
                 <div className="relative w-full h-[500px] rounded-[2rem] p-px overflow-hidden bg-gradient-to-b from-white/10 to-transparent transition-all duration-500 group-hover:from-teal-400/50 group-hover:to-indigo-500/30">
                   {/* Inside Card Wrapper */}
                   <div className="absolute inset-0 bg-[#060C1B] rounded-[2rem] overflow-hidden">
@@ -76,6 +71,7 @@ export default function EventsPage() {
                         </p>
                       </div>
 
+                      {!noExplore && (
                       <div className="mt-6 flex items-center justify-between">
                         <span className="text-xs font-semibold uppercase tracking-wider text-teal-400/80 group-hover:text-teal-400 transition-colors">
                           Explore
@@ -87,17 +83,38 @@ export default function EventsPage() {
                           </svg>
                         </div>
                       </div>
+                      )}
                     </div>
                   </div>
                 </div>
-              </Link>
+            );
+
+            return (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: idx * 0.2, ease: "easeOut" }}
+            >
+              {noExplore ? (
+                <div className="group block relative w-full h-full perspective-1000">
+                  {cardContent}
+                </div>
+              ) : (
+                <Link href={event.link || `/#events`} className="group block relative w-full h-full perspective-1000">
+                  {cardContent}
+                </Link>
+              )}
             </motion.div>
-          ))}
+            );
+          })}
         </div>
       </div>
       
       {/* Bottom fade out */}
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#020812] to-transparent pointer-events-none z-10" />
     </main>
+    </div>
   );
 }
