@@ -932,7 +932,7 @@ export default function ScotlandYardPage() {
             <div className="ornament" style={{marginBottom:24,maxWidth:400,margin:"0 auto 24px"}}>THE FINAL VERDICT</div>
             <h2 className="font-cinzel text-white"
               style={{fontSize:"clamp(48px,6vw,78px)",letterSpacing:3,marginBottom:14,textShadow:"3px 3px 0 rgba(0,0,0,0.3)"}}>
-              The Dead Don&apos;t Wait.
+              The Dead Don&apos;t Wait
             </h2>
             <p className="font-crimson" style={{fontSize:18,color:"rgba(232,200,122,0.45)",marginBottom:44,fontWeight:300,fontStyle:"italic"}}>
               Osiris has opened his ledger. Your name is already written — the question is which side.
