@@ -30,11 +30,6 @@ const ROUNDS = [
   { name: "Osiris Judges",      sub: "The last team standing claims glory",             color: "#3B2200", tc: SAND   },
 ];
 
-const POCS = [
-  { name: "Sahil",  phone: "9508883828" },
-  { name: "Nisarg", phone: "8866475747" },
-];
-
 const CSS = `
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap');
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -95,7 +90,6 @@ const CSS = `
   background-clip:text; animation:shimmer 4s linear infinite;
 }
 
-/* FIX 6: hiero-strip fills full width on all screens */
 .hiero-strip {
   display:flex; overflow:hidden; height:26px; width:100%;
   border-top:1.5px solid rgba(200,134,10,0.35);
@@ -362,7 +356,6 @@ function SandDunes({ opacity=0.18 }:{ opacity?:number }) {
   );
 }
 
-/* FIX 6: spans use flex:1 so they stretch to fill full width */
 function HieroStrip({ color, glyphs }:{ color:string; glyphs:string[] }) {
   return (
     <div className="hiero-strip" style={{background:color}}>
@@ -373,7 +366,6 @@ function HieroStrip({ color, glyphs }:{ color:string; glyphs:string[] }) {
   );
 }
 
-/* FIX 1: reusable TorchPair — one center-left, one center-right */
 function TorchPair({ height=110 }:{ height?:number }) {
   return (
     <>
@@ -395,7 +387,6 @@ export default function ScotlandYardPage() {
       <div className="font-crimson overflow-x-hidden antialiased" style={{background:INK,color:"#fff"}}>
 
         {/* ── HERO ── */}
-        {/* FIX 3: center-aligned hero content */}
         <section
           className="hero-inner relative flex items-center justify-center overflow-hidden"
           style={{minHeight:"95vh",padding:"100px 80px",background:`linear-gradient(130deg,${INK} 0%,${PAPYRUS} 100%)`}}
@@ -423,7 +414,6 @@ export default function ScotlandYardPage() {
             <Obelisk height={210} opacity={0.45}/>
           </div>
 
-          {/* FIX 1: center-left and center-right torches */}
           <div style={{position:"absolute",left:22,top:"50%",transform:"translateY(-50%)",pointerEvents:"none"}} className="hero-deco">
             <Torch height={130}/>
           </div>
@@ -450,7 +440,6 @@ export default function ScotlandYardPage() {
           <div className="scarab" style={{right:88,top:"15%",fontSize:52,opacity:0.25}}>𓂀</div>
           <div className="scarab" style={{left:220,bottom:"22%",fontSize:36,opacity:0.25}}>𓆣</div>
 
-          {/* FIX 3: text block centered */}
           <div className="relative z-10 text-center" style={{maxWidth:720}}>
             <div className="inline-flex items-center gap-2 font-cinzel"
               style={{border:`1px solid rgba(200,134,10,0.4)`,padding:"6px 20px",marginBottom:28,fontSize:12,letterSpacing:4,color:SAND,borderRadius:2}}>
@@ -490,7 +479,6 @@ export default function ScotlandYardPage() {
           <div style={{position:"absolute",left:30,bottom:40,pointerEvents:"none"}} className="pyramid-section-deco">
             <Scarab size={80} opacity={0.38}/>
           </div>
-          {/* FIX 1: center torches */}
           <TorchPair height={110}/>
 
           <div className="section-label" style={{color:RUST}}>About the Event</div>
@@ -521,7 +509,6 @@ export default function ScotlandYardPage() {
           <div style={{position:"absolute",right:80,top:20,pointerEvents:"none"}} className="pyramid-section-deco">
             <Obelisk height={130} opacity={0.35}/>
           </div>
-          {/* FIX 1: center torches */}
           <TorchPair height={100}/>
 
           <div className="section-label" style={{color:GOLD}}>Event Info</div>
@@ -546,22 +533,7 @@ export default function ScotlandYardPage() {
               </div>
             ))}
           </div>
-
-          {/* POC */}
-          <div style={{marginTop:48}}>
-            <div className="ornament" style={{marginBottom:28}}>Points of Contact</div>
-            <div className="flex" style={{gap:18,flexWrap:"wrap"}}>
-              {POCS.map(poc=>(
-                <div key={poc.name}
-                  style={{background:"rgba(200,134,10,0.07)",border:"1px solid rgba(200,134,10,0.15)",borderRadius:10,padding:"18px 32px",display:"flex",flexDirection:"column",gap:4}}>
-                  <div className="font-cinzel text-white" style={{fontSize:15,letterSpacing:2}}>{poc.name}</div>
-                  <div className="font-crimson" style={{fontSize:17,color:SAND}}>{poc.phone}</div>
-                </div>
-              ))}
-            </div>
-          </div>
         </section>
-
         <HieroStrip color={STONE} glyphs={["𓁹","𓊹","𓂀","𓆣","𓅓","𓊪"]}/>
 
         {/* ── TIMELINE ── */}
@@ -576,7 +548,6 @@ export default function ScotlandYardPage() {
           <div className="anim-eyePulse pyramid-section-deco" style={{position:"absolute",left:"50%",top:30,transform:"translateX(-50%)",pointerEvents:"none"}}>
             <EyeOfRa size={150} opacity={0.3}/>
           </div>
-          {/* FIX 1: center torches */}
           <TorchPair height={105}/>
 
           <div className="section-label" style={{color:RUST}}>The Trials</div>
@@ -628,7 +599,6 @@ export default function ScotlandYardPage() {
           <div style={{position:"absolute",right:"17%",bottom:0,pointerEvents:"none"}} className="pyramid-section-deco">
             <Obelisk height={120} opacity={0.38}/>
           </div>
-          {/* FIX 1: center torches */}
           <TorchPair height={120}/>
 
           <div className="relative z-10">
@@ -636,7 +606,6 @@ export default function ScotlandYardPage() {
               <Ankh size={50} opacity={0.65}/>
             </div>
             <div className="ornament" style={{marginBottom:24,maxWidth:400,margin:"0 auto 24px"}}>THE FINAL VERDICT</div>
-            {/* FIX 4: new catchy phrase */}
             <h2 className="font-cinzel text-white"
               style={{fontSize:"clamp(48px,6vw,78px)",letterSpacing:3,marginBottom:14,textShadow:"3px 3px 0 rgba(0,0,0,0.3)"}}>
               The Dead Don&apos;t Wait.
@@ -649,7 +618,6 @@ export default function ScotlandYardPage() {
         </section>
 
         {/* ── FOOTER ── */}
-        {/* FIX 5: brighter footer text */}
         <footer className="footer-inner flex items-center justify-between"
           style={{background:"#04030A",padding:"28px 80px",minHeight:80,borderTop:`2px solid rgba(200,134,10,0.2)`}}>
           <div>
