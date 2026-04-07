@@ -29,7 +29,7 @@ export const SolarSystem = () => {
       radius: 200,
       speed: 20,
       image: Events[0].image || '/scotland_yard.jpeg',
-      link: Events[0].link || '/events/scotland-yard'
+      link: Events[0].link || '/events/scotlandyard'
     },
     {
       id: 1,
@@ -38,7 +38,7 @@ export const SolarSystem = () => {
       radius: 360,
       speed: 28,
       image: Events[1].image || '/square_one.jpeg',
-      link: Events[1].link || '/events/square-one'
+      link: Events[1].link || '/events/squareone'
     },
     {
       id: 2,
