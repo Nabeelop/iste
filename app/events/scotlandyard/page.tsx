@@ -2,9 +2,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 
-/* ─────────────────────────────────────────────
-   COLOUR PALETTE
-───────────────────────────────────────────── */
 const GOLD  = "#C8860A";
 const SAND  = "#E8C87A";
 const RUST  = "#8B2500";
@@ -12,9 +9,6 @@ const INK   = "#0D0800";
 const PAPYRUS = "#1C1000";
 const STONE = "#1E160A";
 
-/* ─────────────────────────────────────────────
-   DATA
-───────────────────────────────────────────── */
 const STATS = [
   { icon: "📅", label: "Date",        value: "21 September 2026" },
   { icon: "📍", label: "Venue",       value: "LHC A" },
@@ -45,9 +39,6 @@ const NAV_LINKS = [
   { name: "Register",href: "#register" },
 ];
 
-/* ─────────────────────────────────────────────
-   GLOBAL CSS
-───────────────────────────────────────────── */
 const CSS = `
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap');
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -357,9 +348,6 @@ html { scroll-behavior: smooth; }
 }
 `;
 
-/* ─────────────────────────────────────────────
-   SVG COMPONENTS (unchanged)
-───────────────────────────────────────────── */
 function Pyramid({ width=320, opacity=0.45, gold=false }:{ width?:number; opacity?:number; gold?:boolean }) {
   const h = width * 0.78;
   const gid = gold ? "pgold" : "pstone";
@@ -575,9 +563,6 @@ function TorchPair({ height=110 }:{ height?:number }) {
   );
 }
 
-/* ─────────────────────────────────────────────
-   NAVBAR COMPONENT
-───────────────────────────────────────────── */
 function EgyptNavbar() {
   const [scrolled, setScrolled]     = useState(false);
   const [menuOpen, setMenuOpen]     = useState(false);
@@ -699,9 +684,6 @@ function EgyptNavbar() {
   );
 }
 
-/* ─────────────────────────────────────────────
-   MAIN PAGE
-───────────────────────────────────────────── */
 export default function ScotlandYardPage() {
   return (
     <div>
@@ -950,6 +932,7 @@ export default function ScotlandYardPage() {
             <button className="btn-egypt">Register Now</button>
           </div>
         </section>
+        <HieroStrip color={GOLD} glyphs={["𓂋","𓅱","𓇯","𓈖","𓊹","𓁹"]}/>
 
         {/* ══ FOOTER ══ */}
         <footer className="footer-inner flex items-center justify-between"
