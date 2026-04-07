@@ -8,6 +8,7 @@ import { SigCard } from "@/components/ui/sig-card";
 // import { TeamStrip } from "@/components/ui/team-strip"; 
 import { consumeSkipNextHomeLoader } from "@/lib/home-loader-skip";
 import SolarSystem from "@/components/SolarSystem";
+import Companies from "@/components/Companies";
 
 const World = dynamic(() => import("@/components/ui/globe").then((m) => m.World), {
   ssr: false,
@@ -15,8 +16,12 @@ const World = dynamic(() => import("@/components/ui/globe").then((m) => m.World)
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const globePhaseRef = useRef(0);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [rotationTrigger, setRotationTrigger] = useState(0);
+  const [scrollValue, setScrollValue] = useState(0);
+  const [activePanel, setActivePanel] = useState<"about" | "social" | "she" | null>(null);
   
   const [showLoader, setShowLoader] = useState(() => !consumeSkipNextHomeLoader());
 
@@ -59,26 +64,120 @@ export default function Home() {
     offset: ["start start", "end end"],
   });
 
+  const timeline = {
+    heroExitStart: 0.12,
+    heroExitEnd: 0.22,
+    aboutEnterEnd: 0.28,
+    aboutHoldEnd: 0.42,
+    aboutExitEnd: 0.48,
+    socialEnterEnd: 0.54,
+    socialHoldEnd: 0.68,
+    socialExitEnd: 0.74,
+    sheEnterEnd: 0.8,
+    sheHoldEnd: 0.9,
+    sheExitEnd: 0.94,
+    middleHoldEnd: 0.97,
+  };
+
+  const getGlobePhase = (progress: number) => {
+    if (progress < timeline.heroExitStart) return 0; // right
+    if (progress < timeline.aboutHoldEnd) return 1; // left
+    if (progress < timeline.socialHoldEnd) return 2; // right
+    if (progress < timeline.sheHoldEnd) return 3; // left
+    return 4; // middle
+  };
+
+  const getGlobeSide = (phase: number) => {
+    if (phase === 1 || phase === 3) return "left";
+    if (phase === 0 || phase === 2) return "right";
+    return "middle";
+  };
+
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    setScrollValue(latest);
+
     if (isMobile) {
       if (isScrolled) setIsScrolled(false);
+      globePhaseRef.current = 0;
+      if (activePanel !== null) setActivePanel(null);
       return;
     }
 
-    if (latest > 0.1 && !isScrolled) setIsScrolled(true);
-    if (latest <= 0.1 && isScrolled) setIsScrolled(false);
+    let nextPanel: "about" | "social" | "she" | null = null;
+    if (latest >= timeline.aboutEnterEnd && latest <= timeline.aboutHoldEnd) {
+      nextPanel = "about";
+    } else if (latest >= timeline.socialEnterEnd && latest <= timeline.socialHoldEnd) {
+      nextPanel = "social";
+    } else if (latest >= timeline.sheEnterEnd && latest <= timeline.sheHoldEnd) {
+      nextPanel = "she";
+    }
+    if (nextPanel !== activePanel) setActivePanel(nextPanel);
+
+    const shouldRotate = latest > 0.08 && latest < timeline.middleHoldEnd;
+    if (shouldRotate && !isScrolled) setIsScrolled(true);
+    if (!shouldRotate && isScrolled) setIsScrolled(false);
+
+    const previousPhase = globePhaseRef.current;
+    const nextPhase = getGlobePhase(latest);
+    if (nextPhase === previousPhase) return;
+
+    const previousSide = getGlobeSide(previousPhase);
+    const nextSide = getGlobeSide(nextPhase);
+    if (previousSide !== "middle" && nextSide !== "middle" && previousSide !== nextSide) {
+      setRotationTrigger((value) => value + 1);
+    }
+
+    globePhaseRef.current = nextPhase;
   });
 
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.15, 1], [1, 1, 0]);
-  const heroY = useTransform(scrollYProgress, [0, 0.15, 1], ["0vh", "-120vh", "-120vh"]);
-  const heroPointerEvents = useTransform(scrollYProgress, (v) => v > 0.1 ? "none" : "auto");
+  const heroOpacity = useTransform(
+    scrollYProgress,
+    [0, timeline.heroExitStart, timeline.heroExitEnd, 1],
+    [1, 1, 0, 0]
+  );
+  const heroY = useTransform(
+    scrollYProgress,
+    [0, timeline.heroExitStart, timeline.heroExitEnd, 1],
+    ["0vh", "0vh", "-120vh", "-120vh"]
+  );
+  const heroPointerEvents = useTransform(scrollYProgress, (v) => v > timeline.heroExitStart ? "none" : "auto");
 
-  const globeX = useTransform(scrollYProgress, [0, 0.1, 0.25, 0.75, 0.85, 1], ["20vw", "20vw", "-20vw", "-20vw", "0vw", "0vw"]);
-  const globeY = useTransform(scrollYProgress, [0, 0.85, 1], ["0vh", "0vh", "-120vh"]);
+  const globeX = useTransform(
+    scrollYProgress,
+    [
+      0,
+      timeline.heroExitStart,
+      timeline.heroExitEnd,
+      timeline.aboutHoldEnd,
+      timeline.aboutExitEnd,
+      timeline.socialHoldEnd,
+      timeline.socialExitEnd,
+      timeline.sheHoldEnd,
+      timeline.sheExitEnd,
+      timeline.middleHoldEnd,
+      1,
+    ],
+    ["20vw", "20vw", "-20vw", "-20vw", "20vw", "20vw", "-20vw", "-20vw", "0vw", "0vw", "0vw"]
+  );
+  const globeY = useTransform(scrollYProgress, [0, timeline.middleHoldEnd, 1], ["0vh", "0vh", "-120vh"]);
 
-  const aboutOpacity = useTransform(scrollYProgress, [0, 0.15, 0.25, 0.75, 0.85, 1], [0, 0, 1, 1, 0, 0]);
-  const aboutY = useTransform(scrollYProgress, [0, 0.15, 0.25, 0.75, 0.85, 1], ["50px", "50px", "0px", "0px", "-100vh", "-100vh"]);
-  const aboutPointerEvents = useTransform(scrollYProgress, (v) => (v > 0.25 && v < 0.75) ? "auto" : "none");
+  const aboutPanelState = {
+    opacity: activePanel === "about" ? 1 : 0,
+    y: activePanel === "about" ? "0px" : scrollValue > timeline.aboutHoldEnd ? "-120vh" : "50px",
+    pointerEvents: activePanel === "about" ? "auto" : "none",
+  } as const;
+
+  const socialPanelState = {
+    opacity: activePanel === "social" ? 1 : 0,
+    y: activePanel === "social" ? "0px" : scrollValue > timeline.socialHoldEnd ? "-120vh" : "50px",
+    pointerEvents: activePanel === "social" ? "auto" : "none",
+  } as const;
+
+  const shePanelState = {
+    opacity: activePanel === "she" ? 1 : 0,
+    y: activePanel === "she" ? "0px" : scrollValue > timeline.sheHoldEnd ? "-120vh" : "50px",
+    pointerEvents: activePanel === "she" ? "auto" : "none",
+  } as const;
 
   const globeConfig: GlobeConfig = {
     pointSize: 4, globeColor: "#042f2e", showAtmosphere: true, atmosphereColor: "#2dd4bf", atmosphereAltitude: 0.15,
@@ -164,7 +263,7 @@ export default function Home() {
           <section className="relative min-h-svh w-full overflow-hidden" id="home">
             <div className="fixed inset-0 z-0 pointer-events-none flex items-center justify-center">
               <div className="relative w-[82vw] h-[82vw] max-w-125 max-h-125 opacity-100">
-                <World data={sampleArcs} globeConfig={globeConfig} isScrolled={false} />
+                <World data={sampleArcs} globeConfig={globeConfig} isScrolled={false} rotationTrigger={0} />
               </div>
             </div>
 
@@ -234,9 +333,35 @@ export default function Home() {
               </div>
             </div>
           </section>
+
+          <section className={`relative z-20 py-20 border-t ${mobilePanelClass} ${mobilePanelBorderClass}`} id="social-initiatives">
+            <div className="max-w-7xl mx-auto px-6 text-center">
+              <h2 className="text-4xl font-bold text-white tracking-tight">Social <span className="text-teal-400">Initiatives</span></h2>
+              <div className="w-24 h-1 bg-linear-to-r from-teal-400 to-transparent rounded-full mx-auto mt-4" />
+              <p className="text-base text-slate-300 leading-relaxed max-w-xl mx-auto mt-6">
+                From digital literacy drives and mentorship circles to community-first tech workshops, ISTE members regularly design initiatives that blend engineering skills with social impact across schools and local communities.
+              </p>
+              <div className="pt-6">
+                <button className="text-teal-400 font-semibold hover:text-white transition-colors inline-flex items-center gap-2 group cursor-pointer">Explore initiatives <span className="group-hover:translate-x-1 transition-transform">→</span></button>
+              </div>
+            </div>
+          </section>
+
+          <section className={`relative z-20 py-20 border-t ${mobilePanelClass} ${mobilePanelBorderClass}`} id="she">
+            <div className="max-w-7xl mx-auto px-6 text-center">
+              <h2 className="text-4xl font-bold text-white tracking-tight"><span className="text-teal-400">SHE</span> at ISTE</h2>
+              <div className="w-24 h-1 bg-linear-to-r from-teal-400 to-transparent rounded-full mx-auto mt-4" />
+              <p className="text-base text-slate-300 leading-relaxed max-w-xl mx-auto mt-6">
+                SHE empowers women in technology through peer support, hands-on sessions, and leadership opportunities that help members grow with confidence, collaborate across SIGs, and build inclusive innovation culture on campus.
+              </p>
+              <div className="pt-6">
+                <button className="text-teal-400 font-semibold hover:text-white transition-colors inline-flex items-center gap-2 group cursor-pointer">Know more about SHE <span className="group-hover:translate-x-1 transition-transform">→</span></button>
+              </div>
+            </div>
+          </section>
         </>
       ) : (
-        <div ref={containerRef} className="relative h-[400vh] w-full" id="home">
+        <div ref={containerRef} className="relative h-[560vh] w-full" id="home">
           <div className="sticky top-0 h-screen w-full overflow-hidden">
             
             <div className="absolute top-1/2 left-[2%] lg:left-[5%] -translate-y-1/2 w-[90%] lg:w-[45%] z-20 pointer-events-none">
@@ -296,12 +421,12 @@ export default function Home() {
 
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-auto">
               <motion.div style={{ x: globeX, y: globeY }} className="relative w-175 h-175 flex items-center justify-center">
-                <World data={sampleArcs} globeConfig={globeConfig} isScrolled={isScrolled} />
+                <World data={sampleArcs} globeConfig={globeConfig} isScrolled={isScrolled} rotationTrigger={rotationTrigger} />
               </motion.div>
             </div>
 
-            <div className="absolute top-1/2 right-[5%] lg:right-[10%] -translate-y-1/2 w-[90%] lg:w-[35%] z-20 pointer-events-none" id="about">
-              <motion.div initial={{ opacity: 0 }} style={{ opacity: aboutOpacity, y: aboutY, pointerEvents: aboutPointerEvents as unknown as React.CSSProperties["pointerEvents"] }} className="space-y-6">
+            <div className="absolute top-1/2 right-[5%] lg:right-[10%] -translate-y-1/2 w-[90%] lg:w-[35%] z-40 pointer-events-none" id="about">
+              <motion.div initial={false} animate={aboutPanelState} transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }} className="space-y-6">
                 <h2 className="text-4xl lg:text-6xl font-bold text-white tracking-tight">About <span className="text-teal-400">Us</span></h2>
                 <div className="w-24 h-1 bg-linear-to-r from-teal-400 to-transparent rounded-full" />
                 <p className="text-lg text-slate-300 leading-relaxed max-w-lg">
@@ -312,11 +437,47 @@ export default function Home() {
                 </div>
               </motion.div>
             </div>
+
+            <div className="absolute top-1/2 left-[5%] lg:left-[8%] -translate-y-1/2 w-[90%] lg:w-[35%] z-40 pointer-events-none" id="social-initiatives">
+              <motion.div
+                initial={false}
+                animate={socialPanelState}
+                transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+                className="space-y-6 text-left"
+              >
+                <h2 className="text-4xl lg:text-6xl font-bold text-white tracking-tight">Social <span className="text-teal-400">Initiatives</span></h2>
+                <div className="w-24 h-1 bg-linear-to-r from-teal-400 to-transparent rounded-full" />
+                <p className="text-lg text-slate-300 leading-relaxed max-w-lg">
+                  ISTE runs student-led outreach that turns technical learning into community outcomes, from mentorship and awareness sessions to practical problem-solving workshops designed for real impact beyond campus.
+                </p>
+                <div className="pt-4 pointer-events-auto">
+                  <button className="text-teal-400 font-semibold hover:text-white transition-colors flex items-center gap-2 group cursor-pointer">Explore initiatives <span className="group-hover:translate-x-1 transition-transform">→</span></button>
+                </div>
+              </motion.div>
+            </div>
+
+            <div className="absolute top-1/2 right-[5%] lg:right-[10%] -translate-y-1/2 w-[90%] lg:w-[35%] z-40 pointer-events-none" id="she">
+              <motion.div
+                initial={false}
+                animate={shePanelState}
+                transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+                className="space-y-6"
+              >
+                <h2 className="text-4xl lg:text-6xl font-bold text-white tracking-tight"><span className="text-teal-400">SHE</span> at ISTE</h2>
+                <div className="w-24 h-1 bg-linear-to-r from-teal-400 to-transparent rounded-full" />
+                <p className="text-lg text-slate-300 leading-relaxed max-w-lg">
+                  SHE creates an inclusive growth space for women in engineering through peer circles, skill sessions, and leadership tracks that encourage confident participation across projects, events, and innovation teams.
+                </p>
+                <div className="pt-4 pointer-events-auto">
+                  <button className="text-teal-400 font-semibold hover:text-white transition-colors flex items-center gap-2 group cursor-pointer">Know more about SHE <span className="group-hover:translate-x-1 transition-transform">→</span></button>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </div>
       )}
 
-      <section className={`relative z-20 ${isMobile ? `pt-8 pb-24 mt-0 ${mobilePanelClass} border-t ${mobilePanelBorderClass}` : "pt-8 pb-24 -mt-[45vh] bg-transparent"}`} id="projects">
+      <section className={`relative z-20 ${isMobile ? `pt-8 pb-24 mt-0 ${mobilePanelClass} border-t ${mobilePanelBorderClass}` : "pt-4 pb-24 mt-0 bg-transparent"}`} id="projects">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="mb-16">
             <h3 className="text-4xl lg:text-5xl font-bold text-white tracking-tight">Our <span className="text-teal-400 drop-shadow-[0_0_15px_rgba(79,209,197,0.3)]">Cosmic Footprint</span></h3>
@@ -324,9 +485,9 @@ export default function Home() {
           </motion.div>
 
           <div className="flex flex-col md:flex-row justify-around items-center gap-12">
-            <div><h2 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-transparent bg-clip-text bg-linear-to-r from-teal-300 to-teal-500">25+</h2><p className="text-lg font-medium text-slate-400 mt-3 uppercase tracking-widest">Years of Legacy</p></div>
+            <div><h2 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-transparent bg-clip-text bg-linear-to-r from-teal-300 to-teal-500">45</h2><p className="text-lg font-medium text-slate-400 mt-3 uppercase tracking-widest">Years of Legacy</p></div>
             <div><h2 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-transparent bg-clip-text bg-linear-to-r from-teal-300 to-teal-500">8</h2><p className="text-lg font-medium text-slate-400 mt-3 uppercase tracking-widest">Core SIGs</p></div>
-            <div><h2 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-transparent bg-clip-text bg-linear-to-r from-teal-300 to-teal-500">100+</h2><p className="text-lg font-medium text-slate-400 mt-3 uppercase tracking-widest">Projects Built</p></div>
+            <div><h2 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-transparent bg-clip-text bg-linear-to-r from-teal-300 to-teal-500">300+</h2><p className="text-lg font-medium text-slate-400 mt-3 uppercase tracking-widest">Members</p></div>
           </div>
         </div>
       </section>
@@ -340,14 +501,14 @@ export default function Home() {
           <h2 className="text-5xl lg:text-6xl font-bold text-center text-white">Our Special Interest <span className="text-teal-400">Groups</span></h2>
           <div className="w-24 h-1 bg-linear-to-r from-teal-400 to-transparent rounded-full mx-auto mt-4 mb-20" />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-             <SigCard title="Crypt" description="Train for ICPC-style contests, master dynamic programming patterns, and sharpen problem-solving speed through weekly challenges and mentoring sessions." delay={0.1} iconPath="/sig-logos/crypt.png" />
-             <SigCard title="Credit" description="Build real fintech products, explore quantitative strategies, and learn risk-aware decision models with market simulations and portfolio case studies." delay={0.2} iconPath="/sig-logos/credit.png" />
-             <SigCard title="Chronicle" description="Craft visual stories through design systems, filmmaking pipelines, and content strategy that amplifies campus projects with high-impact media." delay={0.3} iconPath="/sig-logos/chronicle.png" />
-             <SigCard title="Clutch" description="Prototype robotics and mechanical systems, validate designs with simulation, and iterate quickly from CAD concepts to functional engineering builds." delay={0.4} iconPath="/sig-logos/clutch.png" />
-             <SigCard title="Concrete" description="Design resilient infrastructure solutions, study sustainable urban planning, and solve civil engineering challenges with practical, data-driven methods." delay={0.5} iconPath="/sig-logos/concrete.png" />
-             <SigCard title="Create" description="Ship full-stack apps from idea to deployment, collaborate in product squads, and practice modern engineering workflows across web and mobile platforms." delay={0.6} iconPath="/sig-logos/create.png" />
-             <SigCard title="Charge" description="Experiment with embedded systems, power electronics, and IoT architectures while building reliable hardware prototypes for real-world use cases." delay={0.7} iconPath="/sig-logos/charge.png" />
-             <SigCard title="Catalyst" description="Investigate green processes, smart materials, and chemical innovations that transform lab insights into scalable, sustainability-focused solutions." delay={0.8} iconPath="/sig-logos/catalyst.png" />
+             <SigCard title="Crypt" description="Crypt is ISTE's Computer Science SIG where coders grow through KEPs, projects, and events while sharpening problem-solving and development skills." delay={0.1} iconPath="/sig-logos/crypt.png" />
+             <SigCard title="Credit" description="Credit explores finance, economics, marketing, and strategy, helping members build business-first thinking through projects and product-oriented analytical work." delay={0.2} iconPath="/sig-logos/credit.png" />
+             <SigCard title="Chronicle" description="Chronicle is a creative fraternity where design, storytelling, and aesthetics meet tech, giving members space to express ideas and build impactful media." delay={0.3} iconPath="/sig-logos/chronicle.png" />
+             <SigCard title="Clutch" description="Clutch turns mechanical ideas into reality through fun projects and cross-SIG collaborations, proving engineering is most exciting when teams build together." delay={0.4} iconPath="/sig-logos/clutch.png" />
+             <SigCard title="Concrete" description="Concrete unites civil enthusiasts through KEPs, workshops, and events, strengthening fundamentals and practical skills across diverse civil engineering spheres." delay={0.5} iconPath="/sig-logos/concrete.png" />
+             <SigCard title="Create" description="Create is ISTE's media SIG for photography, videography, animation, and music, transforming creative passion into polished projects, KEPs, and events." delay={0.6} iconPath="/sig-logos/create.png" />
+             <SigCard title="Charge" description="Charge is ISTE's electronics and electrical SIG, guiding curious builders through projects, KEPs, and events focused on practical learning and innovation." delay={0.7} iconPath="/sig-logos/charge.png" />
+             <SigCard title="Catalyst" description="Catalyst focuses on chemical engineering applications, helping members develop technical depth through projects, KEPs, and events that make the field approachable." delay={0.8} iconPath="/sig-logos/catalyst.png" />
           </div>
         </div>
       </section>
@@ -360,6 +521,10 @@ export default function Home() {
         <SolarSystem />
       </div>
 
+      <div id="companies" className={`relative z-20 ${isMobile ? `${mobilePanelClass} border-t ${mobilePanelBorderClass}` : "border-t border-white/5 bg-transparent"}`}>
+        <Companies />
+      </div>
+
       <footer className="relative z-20 border-t border-white/14 bg-black/28 pb-10 pt-14 text-slate-400 shadow-[inset_0_1px_0_rgba(45,212,191,0.15)] sm:border-white/12 sm:bg-black/25 sm:pt-20" id="contact">
         <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-[1.5px] bg-linear-to-r from-transparent via-teal-300/65 to-transparent" />
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 sm:px-6 md:grid-cols-3 md:gap-16">
@@ -369,19 +534,19 @@ export default function Home() {
             <div className="pt-2">
               <h4 className="text-white font-bold uppercase tracking-widest text-sm border-l-2 border-teal-400 pl-4">Socials</h4>
               <div className="mt-4 flex flex-wrap items-center gap-4">
-                <a href="#" aria-label="X" className="p-3 rounded-full bg-white/5 hover:bg-teal-400/20 text-slate-400 hover:text-teal-400 transition-all duration-300">
+                <a href="https://x.com/ISTE_NITK?s=20" target="_blank" rel="noreferrer" aria-label="X" className="p-3 rounded-full bg-white/5 hover:bg-teal-400/20 text-slate-400 hover:text-teal-400 transition-all duration-300">
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                 </a>
-                <a href="#" aria-label="Instagram" className="p-3 rounded-full bg-white/5 hover:bg-teal-400/20 text-slate-400 hover:text-teal-400 transition-all duration-300">
+                <a href="https://www.instagram.com/istenitk/" target="_blank" rel="noreferrer" aria-label="Instagram" className="p-3 rounded-full bg-white/5 hover:bg-teal-400/20 text-slate-400 hover:text-teal-400 transition-all duration-300">
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.332 3.608 1.29.96.953 1.242 2.235 1.306 3.593.058 1.284.07 1.65.07 4.884 0 3.235-.012 3.603-.07 4.883-.064 1.358-.346 2.64-1.306 3.593-.975.958-2.242 1.228-3.608 1.29-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.332-3.608-1.29-.96-.953-1.242-2.235-1.306-3.593-.058-1.284-.07-1.65-.07-4.884 0-3.235.012-3.603.07-4.883.064-1.359.346-2.64 1.306-3.593.975-.958 2.242-1.228 3.608-1.29 1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-1.28.058-2.152.261-2.917.558-.79.307-1.46.717-2.128 1.385s-1.078 1.338-1.385 2.128c-.297.765-.5 1.637-.558 2.917-.058 1.28-.072 1.688-.072 4.947s.014 3.667.072 4.947c.058 1.28.261 2.152.558 2.917.307.79.717 1.46 1.385 2.128s1.338 1.078 2.128 1.385c.765.297 1.637.5 2.917.558 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c1.28-.058 2.152-.261 2.917-.558.79-.307 1.46-.717 2.128-1.385s1.078-1.338 1.385-2.128c.297-.765.5-1.637.558-2.917.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.058-1.28-.261-2.152-.558-2.917a4.91 4.91 0 00-1.385-2.128c-.668-.668-1.338-1.078-2.128-1.385-.765-.297-1.637-.5-2.917-.558-1.28-.058-1.688-.072-4.947-.072zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z"/></svg>
                 </a>
-                <a href="#" aria-label="LinkedIn" className="p-3 rounded-full bg-white/5 hover:bg-teal-400/20 text-slate-400 hover:text-teal-400 transition-all duration-300">
+                <a href="https://www.linkedin.com/company/istenitk/" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="p-3 rounded-full bg-white/5 hover:bg-teal-400/20 text-slate-400 hover:text-teal-400 transition-all duration-300">
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path fillRule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clipRule="evenodd" /></svg>
                 </a>
-                <a href="#" aria-label="Facebook" className="p-3 rounded-full bg-white/5 hover:bg-teal-400/20 text-slate-400 hover:text-teal-400 transition-all duration-300">
+                <a href="https://www.facebook.com/istenitk" target="_blank" rel="noreferrer" aria-label="Facebook" className="p-3 rounded-full bg-white/5 hover:bg-teal-400/20 text-slate-400 hover:text-teal-400 transition-all duration-300">
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12.073C22 6.503 17.523 2 12 2S2 6.503 2 12.073c0 5.03 3.657 9.2 8.438 9.957v-7.042H7.898v-2.915h2.54V9.845c0-2.52 1.492-3.914 3.777-3.914 1.094 0 2.238.196 2.238.196v2.476h-1.26c-1.243 0-1.63.773-1.63 1.566v1.88h2.773l-.443 2.915h-2.33v7.042C18.343 21.273 22 17.103 22 12.073z" /></svg>
                 </a>
-                <a href="#" aria-label="GitHub" className="p-3 rounded-full bg-white/5 hover:bg-teal-400/20 text-slate-400 hover:text-teal-400 transition-all duration-300">
+                <a href="https://github.com/istenitk" target="_blank" rel="noreferrer" aria-label="GitHub" className="p-3 rounded-full bg-white/5 hover:bg-teal-400/20 text-slate-400 hover:text-teal-400 transition-all duration-300">
                   <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5C5.649.5.5 5.649.5 12a11.5 11.5 0 008 10.93c.586.108.8-.255.8-.567v-2.02c-3.252.707-3.938-1.566-3.938-1.566-.533-1.356-1.302-1.718-1.302-1.718-1.065-.729.081-.714.081-.714 1.178.083 1.798 1.209 1.798 1.209 1.046 1.792 2.744 1.275 3.413.975.106-.758.41-1.275.746-1.568-2.596-.295-5.326-1.298-5.326-5.778 0-1.276.456-2.319 1.205-3.137-.12-.296-.523-1.487.114-3.1 0 0 .984-.315 3.225 1.198A11.22 11.22 0 0112 6.175c.994.005 1.995.134 2.93.393 2.24-1.513 3.223-1.198 3.223-1.198.638 1.613.235 2.804.116 3.1.75.818 1.203 1.86 1.203 3.137 0 4.492-2.735 5.48-5.34 5.77.422.364.798 1.08.798 2.177v3.227c0 .315.212.68.806.565A11.5 11.5 0 0023.5 12C23.5 5.649 18.351.5 12 .5z" /></svg>
                 </a>
               </div>
@@ -416,7 +581,7 @@ export default function Home() {
                 <span className="text-sm font-medium tracking-wide">iste@nitk.edu.in</span>
               </a>
               <a
-                href="tel:+910000000000"
+                href="tel:+917892743530"
                 aria-label="Call ISTE NITK"
                 className="group flex items-center gap-3 rounded-xl bg-white/5 p-3 text-slate-300 transition-all duration-300 hover:bg-teal-400/20 hover:text-teal-300"
               >
@@ -426,8 +591,8 @@ export default function Home() {
                   </svg>
                 </span>
                 <span className="text-sm leading-tight">
-                  <span className="block font-semibold text-slate-200">Placeholder Name · Role</span>
-                  <span className="block text-slate-400 transition-colors group-hover:text-teal-200">+91 00000 00000</span>
+                  <span className="block font-semibold text-slate-200">External Affairs Coordinator</span>
+                  <span className="block text-slate-400 transition-colors group-hover:text-teal-200">+91 78927 43530</span>
                 </span>
               </a>
             </div>
