@@ -30,6 +30,11 @@ const ROUNDS = [
   { name: "Osiris Judges",      sub: "The last team standing claims glory",             color: "#3B2200", tc: SAND   },
 ];
 
+const POCS = [
+  { name: "Sahil",  phone: "9508883828" },
+  { name: "Nisarg", phone: "8866475747" },
+];
+
 const CSS = `
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap');
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -54,13 +59,13 @@ const CSS = `
   100% { background-position:200% center; }
 }
 @keyframes eyePulse {
-  0%,100% { opacity:0.18; transform:scale(1); }
-  50%     { opacity:0.32; transform:scale(1.05); }
+  0%,100% { opacity:0.45; transform:scale(1); }
+  50%     { opacity:0.7; transform:scale(1.05); }
 }
 @keyframes torchFlame {
-  0%,100% { opacity:0.85; transform:scaleY(1) scaleX(1); }
-  33%     { opacity:0.65; transform:scaleY(1.12) scaleX(0.88); }
-  66%     { opacity:0.95; transform:scaleY(0.94) scaleX(1.06); }
+  0%,100% { opacity:0.9; transform:scaleY(1) scaleX(1); }
+  33%     { opacity:0.7; transform:scaleY(1.12) scaleX(0.88); }
+  66%     { opacity:1; transform:scaleY(0.94) scaleX(1.06); }
 }
 
 .anim-flicker   { animation: flicker 3s ease-in-out infinite; }
@@ -89,19 +94,22 @@ const CSS = `
   -webkit-background-clip:text; -webkit-text-fill-color:transparent;
   background-clip:text; animation:shimmer 4s linear infinite;
 }
+
+/* FIX 6: hiero-strip fills full width on all screens */
 .hiero-strip {
-  display:flex; overflow:hidden; height:26px;
+  display:flex; overflow:hidden; height:26px; width:100%;
   border-top:1.5px solid rgba(200,134,10,0.35);
   border-bottom:1.5px solid rgba(200,134,10,0.35);
   align-items:center;
 }
 .hiero-strip span {
-  min-width:22px; height:18px; margin:0 2px; flex-shrink:0;
+  flex: 1 0 22px; height:18px; margin:0 2px;
   border:1px solid rgba(200,134,10,0.22);
   background:rgba(200,134,10,0.08); border-radius:2px;
   display:flex; align-items:center; justify-content:center;
   font-size:11px; color:rgba(200,134,10,0.5);
 }
+
 .card-egypt {
   position:relative; overflow:hidden;
   transition:transform 0.28s ease,background 0.2s,box-shadow 0.28s;
@@ -126,7 +134,7 @@ const CSS = `
   background-image:radial-gradient(rgba(200,134,10,0.1) 1px,transparent 1px);
   background-size:28px 28px; opacity:0.5;
 }
-.scarab { position:absolute; opacity:0.1; pointer-events:none; }
+.scarab { position:absolute; opacity:0.25; pointer-events:none; }
 .btn-egypt {
   font-family:'Cinzel',serif; display:inline-block; cursor:pointer;
   background:${GOLD}; color:${INK}; padding:14px 52px; border:none;
@@ -162,7 +170,7 @@ const CSS = `
 
 /* ───── SVG COMPONENTS ───── */
 
-function Pyramid({ width=320, opacity=0.22, gold=false }:{ width?:number; opacity?:number; gold?:boolean }) {
+function Pyramid({ width=320, opacity=0.45, gold=false }:{ width?:number; opacity?:number; gold?:boolean }) {
   const h = width * 0.78;
   const gid = gold ? "pgold" : "pstone";
   return (
@@ -171,29 +179,29 @@ function Pyramid({ width=320, opacity=0.22, gold=false }:{ width?:number; opacit
         <linearGradient id={gid} x1="0" y1="0" x2="1" y2="1">
           {gold
             ? <><stop offset="0%" stopColor="#C8860A" stopOpacity={opacity*1.6}/><stop offset="60%" stopColor="#8B5E00" stopOpacity={opacity*0.9}/><stop offset="100%" stopColor="#3A2400" stopOpacity={opacity*0.5}/></>
-            : <><stop offset="0%" stopColor="#3A2800" stopOpacity={opacity*1.4}/><stop offset="50%" stopColor="#5C3D00" stopOpacity={opacity}/><stop offset="100%" stopColor="#1A1000" stopOpacity={opacity*0.6}/></>
+            : <><stop offset="0%" stopColor="#3A2800" stopOpacity={opacity*1.4}/><stop offset="50%" stopColor="#7A5500" stopOpacity={opacity}/><stop offset="100%" stopColor="#2A1800" stopOpacity={opacity*0.6}/></>
           }
         </linearGradient>
         <linearGradient id={`${gid}_sh`} x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#000" stopOpacity="0.4"/>
+          <stop offset="0%" stopColor="#000" stopOpacity="0.5"/>
           <stop offset="100%" stopColor="#000" stopOpacity="0"/>
         </linearGradient>
       </defs>
       <polygon points={`${width/2},0 ${width},${h} 0,${h}`} fill={`url(#${gid})`}/>
       <polygon points={`${width/2},0 ${width},${h} ${width*0.58},${h}`} fill={`url(#${gid}_sh)`}/>
-      <line x1={width/2} y1={2} x2={0} y2={h} stroke={`rgba(200,134,10,${opacity*0.6})`} strokeWidth="0.8"/>
-      <line x1={width/2} y1={2} x2={width} y2={h} stroke={`rgba(200,134,10,${opacity*0.3})`} strokeWidth="0.8"/>
-      <circle cx={width/2} cy={6} r={5} fill={`rgba(200,134,10,${opacity*2})`}/>
+      <line x1={width/2} y1={2} x2={0} y2={h} stroke={`rgba(200,134,10,${opacity*0.9})`} strokeWidth="1"/>
+      <line x1={width/2} y1={2} x2={width} y2={h} stroke={`rgba(200,134,10,${opacity*0.5})`} strokeWidth="1"/>
+      <circle cx={width/2} cy={6} r={5} fill={`rgba(200,134,10,${Math.min(opacity*2.5,1)})`}/>
       {Array.from({length:8}).map((_,i)=>{
         const t=(i+1)/9; const y=h*t; const xL=(width/2)*t; const xR=width-xL;
-        return <line key={i} x1={xL} y1={y} x2={xR} y2={y} stroke={`rgba(200,134,10,${opacity*0.35})`} strokeWidth="0.6"/>;
+        return <line key={i} x1={xL} y1={y} x2={xR} y2={y} stroke={`rgba(200,134,10,${opacity*0.55})`} strokeWidth="0.7"/>;
       })}
-      <line x1={0} y1={h-1} x2={width} y2={h-1} stroke={`rgba(200,134,10,${opacity*0.8})`} strokeWidth="1.5"/>
+      <line x1={0} y1={h-1} x2={width} y2={h-1} stroke={`rgba(200,134,10,${opacity})`} strokeWidth="1.5"/>
     </svg>
   );
 }
 
-function EyeOfRa({ size=120, opacity=0.25 }:{ size?:number; opacity?:number }) {
+function EyeOfRa({ size=120, opacity=0.55 }:{ size?:number; opacity?:number }) {
   return (
     <svg width={size} height={size*0.55} viewBox="0 0 200 110" style={{display:"block",opacity}}>
       <defs>
@@ -205,7 +213,7 @@ function EyeOfRa({ size=120, opacity=0.25 }:{ size?:number; opacity?:number }) {
       </defs>
       <path d="M10,55 Q100,2 190,55" stroke="#C8860A" strokeWidth="2.5" fill="none"/>
       <path d="M10,55 Q100,90 190,55" stroke="#C8860A" strokeWidth="2" fill="none"/>
-      <path d="M10,55 Q100,2 190,55 Q100,90 10,55" fill="rgba(200,134,10,0.07)"/>
+      <path d="M10,55 Q100,2 190,55 Q100,90 10,55" fill="rgba(200,134,10,0.12)"/>
       <circle cx="100" cy="55" r="22" fill="url(#irisG)"/>
       <circle cx="100" cy="55" r="10" fill="#0D0800"/>
       <circle cx="106" cy="50" r="3" fill="rgba(255,255,255,0.3)"/>
@@ -217,7 +225,7 @@ function EyeOfRa({ size=120, opacity=0.25 }:{ size?:number; opacity?:number }) {
   );
 }
 
-function Ankh({ size=80, opacity=0.3 }:{ size?:number; opacity?:number }) {
+function Ankh({ size=80, opacity=0.55 }:{ size?:number; opacity?:number }) {
   return (
     <svg width={size} height={size*1.4} viewBox="0 0 80 112" style={{display:"block",opacity}}>
       <ellipse cx="40" cy="30" rx="20" ry="26" fill="none" stroke="#C8860A" strokeWidth="6"/>
@@ -231,118 +239,111 @@ function Torch({ height=120 }:{ height?:number }) {
   return (
     <svg width={height*0.3} height={height} viewBox="0 0 36 120" style={{display:"block"}}>
       <g className="torch-flame">
-        <ellipse cx="18" cy="20" rx="10" ry="17" fill="rgba(255,180,0,0.8)"/>
-        <ellipse cx="18" cy="25" rx="7" ry="13" fill="rgba(255,100,0,0.75)"/>
-        <ellipse cx="18" cy="30" rx="4" ry="8" fill="rgba(255,230,60,0.9)"/>
-        <ellipse cx="18" cy="13" rx="4" ry="8" fill="rgba(255,240,160,0.55)"/>
+        <ellipse cx="18" cy="20" rx="10" ry="17" fill="rgba(255,180,0,0.95)"/>
+        <ellipse cx="18" cy="25" rx="7" ry="13" fill="rgba(255,100,0,0.9)"/>
+        <ellipse cx="18" cy="30" rx="4" ry="8" fill="rgba(255,230,60,1)"/>
+        <ellipse cx="18" cy="13" rx="4" ry="8" fill="rgba(255,240,160,0.7)"/>
       </g>
-      <rect x="11" y="35" width="14" height="14" rx="2" fill="#5C3A00"/>
-      <rect x="9" y="44" width="18" height="5" rx="2" fill="#7A4E00"/>
-      <rect x="15" y="50" width="6" height="70" rx="3" fill="#6B4800"/>
+      <rect x="11" y="35" width="14" height="14" rx="2" fill="#7A5000"/>
+      <rect x="9" y="44" width="18" height="5" rx="2" fill="#9A6600"/>
+      <rect x="15" y="50" width="6" height="70" rx="3" fill="#8B6000"/>
       {[62,77,92,107].map(y=>(
-        <line key={y} x1="15" y1={y} x2="21" y2={y} stroke="rgba(200,134,10,0.5)" strokeWidth="1.5"/>
+        <line key={y} x1="15" y1={y} x2="21" y2={y} stroke="rgba(200,134,10,0.7)" strokeWidth="1.5"/>
       ))}
     </svg>
   );
 }
 
-function Mummy({ width=100, opacity=0.22 }:{ width?:number; opacity?:number }) {
+function Mummy({ width=100, opacity=0.5 }:{ width?:number; opacity?:number }) {
   return (
     <svg width={width} height={width*2.8} viewBox="0 0 100 280" style={{display:"block",opacity}}>
       <defs>
         <linearGradient id="mG" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#7A6030"/>
-          <stop offset="50%" stopColor="#A88040"/>
-          <stop offset="100%" stopColor="#5A4820"/>
+          <stop offset="0%" stopColor="#9A7840"/>
+          <stop offset="50%" stopColor="#C8A050"/>
+          <stop offset="100%" stopColor="#7A6030"/>
         </linearGradient>
       </defs>
-      {/* Head */}
       <ellipse cx="50" cy="28" rx="22" ry="26" fill="url(#mG)"/>
       {[14,20,27,33,40].map((y,i)=>(
-        <line key={y} x1={30+i*2} y1={y} x2={70-i} y2={y} stroke="rgba(200,160,60,0.5)" strokeWidth="1.5"/>
+        <line key={y} x1={30+i*2} y1={y} x2={70-i} y2={y} stroke="rgba(220,180,80,0.7)" strokeWidth="1.5"/>
       ))}
       <ellipse cx="42" cy="26" rx="4" ry="3" fill="#1a1000"/>
       <ellipse cx="58" cy="26" rx="4" ry="3" fill="#1a1000"/>
-      <ellipse cx="42" cy="25" rx="1.5" ry="1" fill="rgba(200,134,10,0.8)"/>
-      <ellipse cx="58" cy="25" rx="1.5" ry="1" fill="rgba(200,134,10,0.8)"/>
-      {/* Neck */}
+      <ellipse cx="42" cy="25" rx="1.5" ry="1" fill="rgba(220,160,20,1)"/>
+      <ellipse cx="58" cy="25" rx="1.5" ry="1" fill="rgba(220,160,20,1)"/>
       <rect x="40" y="52" width="20" height="14" rx="4" fill="url(#mG)"/>
-      {/* Torso */}
       <rect x="18" y="64" width="64" height="62" rx="10" fill="url(#mG)"/>
-      {/* Crossed arm wrappings */}
       {[72,83,94,105,116,124].map((y,i)=>(
-        <line key={y} x1={22+i} y1={y} x2={78-i} y2={y} stroke="rgba(200,160,60,0.45)" strokeWidth="1.8"/>
+        <line key={y} x1={22+i} y1={y} x2={78-i} y2={y} stroke="rgba(220,180,80,0.65)" strokeWidth="1.8"/>
       ))}
-      {/* Collar */}
-      <path d="M20,66 Q50,78 80,66" stroke="rgba(200,134,10,0.7)" strokeWidth="3" fill="none"/>
-      <path d="M22,71 Q50,83 78,71" stroke="rgba(200,134,10,0.5)" strokeWidth="2" fill="none"/>
-      {/* Lower torso */}
+      <path d="M20,66 Q50,78 80,66" stroke="rgba(220,160,20,0.9)" strokeWidth="3" fill="none"/>
+      <path d="M22,71 Q50,83 78,71" stroke="rgba(220,160,20,0.7)" strokeWidth="2" fill="none"/>
       <rect x="22" y="124" width="56" height="78" rx="8" fill="url(#mG)"/>
       {[132,144,156,168,180,192].map((y,i)=>(
-        <line key={y} x1={22+i} y1={y} x2={78-i} y2={y} stroke="rgba(200,160,60,0.4)" strokeWidth="1.5"/>
+        <line key={y} x1={22+i} y1={y} x2={78-i} y2={y} stroke="rgba(220,180,80,0.6)" strokeWidth="1.5"/>
       ))}
-      {/* Legs */}
       <rect x="24" y="200" width="22" height="72" rx="8" fill="url(#mG)"/>
       <rect x="54" y="200" width="22" height="72" rx="8" fill="url(#mG)"/>
       {[210,222,234,246,258].map(y=>(
         <React.Fragment key={y}>
-          <line x1="24" y1={y} x2="46" y2={y} stroke="rgba(200,160,60,0.4)" strokeWidth="1.5"/>
-          <line x1="54" y1={y} x2="76" y2={y} stroke="rgba(200,160,60,0.4)" strokeWidth="1.5"/>
+          <line x1="24" y1={y} x2="46" y2={y} stroke="rgba(220,180,80,0.6)" strokeWidth="1.5"/>
+          <line x1="54" y1={y} x2="76" y2={y} stroke="rgba(220,180,80,0.6)" strokeWidth="1.5"/>
         </React.Fragment>
       ))}
-      <ellipse cx="35" cy="272" rx="12" ry="7" fill="#5C4020"/>
-      <ellipse cx="65" cy="272" rx="12" ry="7" fill="#5C4020"/>
+      <ellipse cx="35" cy="272" rx="12" ry="7" fill="#7A5530"/>
+      <ellipse cx="65" cy="272" rx="12" ry="7" fill="#7A5530"/>
     </svg>
   );
 }
 
-function Obelisk({ height=200, opacity=0.2 }:{ height?:number; opacity?:number }) {
+function Obelisk({ height=200, opacity=0.45 }:{ height?:number; opacity?:number }) {
   const w=height*0.18;
   return (
     <svg width={w*3} height={height} viewBox={`0 0 ${w*3} ${height}`} style={{display:"block",opacity}}>
       <defs>
         <linearGradient id="obG" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#5C3A00"/>
-          <stop offset="40%" stopColor="#8B5A00"/>
-          <stop offset="100%" stopColor="#3A2200"/>
+          <stop offset="0%" stopColor="#7A5000"/>
+          <stop offset="40%" stopColor="#AA7800"/>
+          <stop offset="100%" stopColor="#5A3800"/>
         </linearGradient>
       </defs>
       <rect x={w*0.5} y={height-18} width={w*2} height={18} rx="2" fill="url(#obG)"/>
       <rect x={w*0.7} y={height-30} width={w*1.6} height={14} rx="2" fill="url(#obG)"/>
       <polygon points={`${w*1.5},12 ${w*0.85},${height-32} ${w*2.15},${height-32}`} fill="url(#obG)"/>
-      <polygon points={`${w*1.5},0 ${w*1.18},16 ${w*1.82},16`} fill="rgba(200,134,10,0.8)"/>
+      <polygon points={`${w*1.5},0 ${w*1.18},16 ${w*1.82},16`} fill="rgba(220,160,20,0.95)"/>
       {[0.3,0.48,0.64,0.78].map((t,i)=>{
         const y=16+(height-50)*t; const xOff=(1-t)*w*0.3;
-        return <rect key={i} x={w*1.5-5-xOff} y={y} width={10+xOff*2} height={3} rx="1" fill="rgba(200,134,10,0.4)"/>;
+        return <rect key={i} x={w*1.5-5-xOff} y={y} width={10+xOff*2} height={3} rx="1" fill="rgba(200,134,10,0.65)"/>;
       })}
     </svg>
   );
 }
 
-function Scarab({ size=60, opacity=0.3 }:{ size?:number; opacity?:number }) {
+function Scarab({ size=60, opacity=0.5 }:{ size?:number; opacity?:number }) {
   return (
     <svg width={size} height={size*0.9} viewBox="0 0 60 54" style={{display:"block",opacity}}>
       <defs>
         <radialGradient id="scG" cx="50%" cy="40%" r="55%">
-          <stop offset="0%" stopColor="#8B6010"/>
-          <stop offset="100%" stopColor="#3A2800"/>
+          <stop offset="0%" stopColor="#AA7820"/>
+          <stop offset="100%" stopColor="#5A3C00"/>
         </radialGradient>
       </defs>
       <ellipse cx="30" cy="30" rx="16" ry="20" fill="url(#scG)"/>
       <ellipse cx="30" cy="12" rx="10" ry="9" fill="url(#scG)"/>
-      <line x1="30" y1="14" x2="30" y2="50" stroke="rgba(200,134,10,0.6)" strokeWidth="1"/>
-      <path d="M14,22 Q4,18 2,30 Q4,42 14,38" fill="rgba(80,50,10,0.7)"/>
-      <path d="M14,24 Q6,20 4,30 Q6,40 14,36" stroke="rgba(200,134,10,0.4)" strokeWidth="0.8" fill="none"/>
-      <path d="M46,22 Q56,18 58,30 Q56,42 46,38" fill="rgba(80,50,10,0.7)"/>
-      <path d="M46,24 Q54,20 56,30 Q54,40 46,36" stroke="rgba(200,134,10,0.4)" strokeWidth="0.8" fill="none"/>
+      <line x1="30" y1="14" x2="30" y2="50" stroke="rgba(220,160,20,0.8)" strokeWidth="1"/>
+      <path d="M14,22 Q4,18 2,30 Q4,42 14,38" fill="rgba(100,70,10,0.85)"/>
+      <path d="M14,24 Q6,20 4,30 Q6,40 14,36" stroke="rgba(200,134,10,0.65)" strokeWidth="0.8" fill="none"/>
+      <path d="M46,22 Q56,18 58,30 Q56,42 46,38" fill="rgba(100,70,10,0.85)"/>
+      <path d="M46,24 Q54,20 56,30 Q54,40 46,36" stroke="rgba(200,134,10,0.65)" strokeWidth="0.8" fill="none"/>
       {[-1,0,1].map(i=>(
         <React.Fragment key={i}>
-          <line x1="16" y1={30+i*8} x2="4" y2={34+i*8} stroke="rgba(200,134,10,0.5)" strokeWidth="1"/>
-          <line x1="44" y1={30+i*8} x2="56" y2={34+i*8} stroke="rgba(200,134,10,0.5)" strokeWidth="1"/>
+          <line x1="16" y1={30+i*8} x2="4" y2={34+i*8} stroke="rgba(200,134,10,0.7)" strokeWidth="1"/>
+          <line x1="44" y1={30+i*8} x2="56" y2={34+i*8} stroke="rgba(200,134,10,0.7)" strokeWidth="1"/>
         </React.Fragment>
       ))}
-      <line x1="26" y1="4" x2="18" y2="-2" stroke="rgba(200,134,10,0.6)" strokeWidth="1"/>
-      <line x1="34" y1="4" x2="42" y2="-2" stroke="rgba(200,134,10,0.6)" strokeWidth="1"/>
+      <line x1="26" y1="4" x2="18" y2="-2" stroke="rgba(200,134,10,0.8)" strokeWidth="1"/>
+      <line x1="34" y1="4" x2="42" y2="-2" stroke="rgba(200,134,10,0.8)" strokeWidth="1"/>
     </svg>
   );
 }
@@ -361,80 +362,96 @@ function SandDunes({ opacity=0.18 }:{ opacity?:number }) {
   );
 }
 
+/* FIX 6: spans use flex:1 so they stretch to fill full width */
 function HieroStrip({ color, glyphs }:{ color:string; glyphs:string[] }) {
   return (
     <div className="hiero-strip" style={{background:color}}>
-      {Array.from({length:60}).map((_,i)=>(
+      {Array.from({length:80}).map((_,i)=>(
         <span key={i}>{glyphs[i%glyphs.length]}</span>
       ))}
     </div>
   );
 }
 
+/* FIX 1: reusable TorchPair — one center-left, one center-right */
+function TorchPair({ height=110 }:{ height?:number }) {
+  return (
+    <>
+      <div style={{position:"absolute",left:22,top:"50%",transform:"translateY(-50%)",pointerEvents:"none"}} className="pyramid-section-deco">
+        <Torch height={height}/>
+      </div>
+      <div style={{position:"absolute",right:22,top:"50%",transform:"translateY(-50%)",pointerEvents:"none"}} className="pyramid-section-deco">
+        <Torch height={height}/>
+      </div>
+    </>
+  );
+}
+
 /* ───── PAGE ───── */
 export default function ScotlandYardPage() {
   return (
-    <>
+    <div>
       <style>{CSS}</style>
       <div className="font-crimson overflow-x-hidden antialiased" style={{background:INK,color:"#fff"}}>
 
         {/* ── HERO ── */}
+        {/* FIX 3: center-aligned hero content */}
         <section
-          className="hero-inner relative flex items-center overflow-hidden"
+          className="hero-inner relative flex items-center justify-center overflow-hidden"
           style={{minHeight:"95vh",padding:"100px 80px",background:`linear-gradient(130deg,${INK} 0%,${PAPYRUS} 100%)`}}
         >
           <div className="papyrus-bg"/>
           <div className="ankh-glow" style={{width:600,height:600,left:-200,top:"40%",transform:"translateY(-50%)"}}/>
 
           {/* Eye of Ra */}
-          <div className="anim-eyePulse hero-deco" style={{position:"absolute",right:"8%",top:"10%",pointerEvents:"none"}}>
-            <EyeOfRa size={220} opacity={0.22}/>
+          <div className="anim-eyePulse hero-deco" style={{position:"absolute",right:"6%",top:"10%",pointerEvents:"none"}}>
+            <EyeOfRa size={220} opacity={0.5}/>
           </div>
 
           {/* Pyramids */}
           <div style={{position:"absolute",bottom:0,right:0,display:"flex",alignItems:"flex-end",pointerEvents:"none"}} className="hero-deco">
-            <div className="anim-driftSlow delay-2"><Pyramid width={170} opacity={0.13}/></div>
-            <div className="anim-driftSlow delay-0"><Pyramid width={270} opacity={0.19} gold/></div>
-            <div className="anim-driftSlow delay-3"><Pyramid width={130} opacity={0.11}/></div>
+            <div className="anim-driftSlow delay-2"><Pyramid width={170} opacity={0.35}/></div>
+            <div className="anim-driftSlow delay-0"><Pyramid width={270} opacity={0.45} gold/></div>
+            <div className="anim-driftSlow delay-3"><Pyramid width={130} opacity={0.3}/></div>
           </div>
 
           {/* Obelisks */}
           <div style={{position:"absolute",right:"30%",bottom:0,pointerEvents:"none"}} className="hero-deco">
-            <Obelisk height={155} opacity={0.17}/>
+            <Obelisk height={155} opacity={0.4}/>
           </div>
           <div style={{position:"absolute",right:"22%",bottom:0,pointerEvents:"none"}} className="hero-deco">
-            <Obelisk height={210} opacity={0.21}/>
+            <Obelisk height={210} opacity={0.45}/>
           </div>
 
-          {/* Torches */}
-          <div style={{position:"absolute",left:24,top:"26%",pointerEvents:"none"}} className="hero-deco">
+          {/* FIX 1: center-left and center-right torches */}
+          <div style={{position:"absolute",left:22,top:"50%",transform:"translateY(-50%)",pointerEvents:"none"}} className="hero-deco">
             <Torch height={130}/>
           </div>
-          <div style={{position:"absolute",left:24,bottom:"20%",pointerEvents:"none"}} className="hero-deco">
-            <Torch height={110}/>
+          <div style={{position:"absolute",right:22,top:"50%",transform:"translateY(-50%)",pointerEvents:"none"}} className="hero-deco">
+            <Torch height={130}/>
           </div>
 
           {/* Mummy */}
-          <div className="anim-driftSlow delay-1 hero-deco" style={{position:"absolute",right:"4%",bottom:0,pointerEvents:"none"}}>
-            <Mummy width={88} opacity={0.28}/>
+          <div className="anim-driftSlow delay-1 hero-deco" style={{position:"absolute",left:"4%",bottom:0,pointerEvents:"none"}}>
+            <Mummy width={88} opacity={0.5}/>
           </div>
 
           {/* Ankh */}
-          <div className="anim-drift delay-2 hero-deco" style={{position:"absolute",right:"40%",top:"8%",pointerEvents:"none"}}>
-            <Ankh size={58} opacity={0.18}/>
+          <div className="anim-drift delay-2 hero-deco" style={{position:"absolute",left:"14%",top:"8%",pointerEvents:"none"}}>
+            <Ankh size={58} opacity={0.45}/>
           </div>
 
           {/* Scarab */}
-          <div className="anim-driftSlow delay-1 hero-deco" style={{position:"absolute",left:"17%",top:"13%",pointerEvents:"none"}}>
-            <Scarab size={48} opacity={0.2}/>
+          <div className="anim-driftSlow delay-1 hero-deco" style={{position:"absolute",right:"42%",top:"10%",pointerEvents:"none"}}>
+            <Scarab size={50} opacity={0.45}/>
           </div>
 
           {/* Unicode glyphs */}
-          <div className="scarab" style={{right:88,top:"15%",fontSize:52}}>𓂀</div>
-          <div className="scarab" style={{right:220,bottom:"22%",fontSize:36}}>𓆣</div>
+          <div className="scarab" style={{right:88,top:"15%",fontSize:52,opacity:0.25}}>𓂀</div>
+          <div className="scarab" style={{left:220,bottom:"22%",fontSize:36,opacity:0.25}}>𓆣</div>
 
-          {/* Hero text */}
-          <div className="relative z-10" style={{maxWidth:660}}>
+          {/* FIX 3: text block centered */}
+          <div className="relative z-10 text-center" style={{maxWidth:720}}>
             <div className="inline-flex items-center gap-2 font-cinzel"
               style={{border:`1px solid rgba(200,134,10,0.4)`,padding:"6px 20px",marginBottom:28,fontSize:12,letterSpacing:4,color:SAND,borderRadius:2}}>
               <span className="anim-flicker inline-block" style={{width:6,height:6,borderRadius:"50%",background:GOLD}}/>
@@ -450,7 +467,7 @@ export default function ScotlandYardPage() {
               of Osiris
             </h1>
             <div className="ornament" style={{marginBottom:28}}>JUDGEMENT AWAITS</div>
-            <p className="font-crimson" style={{color:"rgba(232,200,122,0.6)",maxWidth:480,lineHeight:2,fontSize:19,fontWeight:300,marginBottom:38,fontStyle:"italic"}}>
+            <p className="font-crimson" style={{color:"rgba(232,200,122,0.6)",maxWidth:520,lineHeight:2,fontSize:19,fontWeight:300,marginBottom:38,fontStyle:"italic",margin:"0 auto 38px"}}>
               The sands of time have spoken. Your wit will be tested. Your conscience weighed.
               Your every step, closer to salvation — or doom.
             </p>
@@ -459,20 +476,22 @@ export default function ScotlandYardPage() {
         </section>
 
         {/* Sand dunes */}
-        <div style={{marginTop:-2,background:STONE}}><SandDunes opacity={0.3}/></div>
+        <div style={{marginTop:-2,background:STONE}}><SandDunes opacity={0.35}/></div>
         <HieroStrip color={STONE} glyphs={["𓂀","𓆣","𓅓","𓁹","𓊪","𓂋"]}/>
 
         {/* ── ABOUT ── */}
         <section className="section-pad" style={{padding:"96px 80px",background:PAPYRUS,position:"relative",overflow:"hidden"}}>
           <div style={{position:"absolute",right:40,bottom:0,pointerEvents:"none"}} className="pyramid-section-deco">
-            <Mummy width={120} opacity={0.14}/>
+            <Mummy width={120} opacity={0.45}/>
           </div>
           <div style={{position:"absolute",right:200,top:40,pointerEvents:"none"}} className="pyramid-section-deco">
-            <Ankh size={48} opacity={0.1}/>
+            <Ankh size={55} opacity={0.35}/>
           </div>
           <div style={{position:"absolute",left:30,bottom:40,pointerEvents:"none"}} className="pyramid-section-deco">
-            <Scarab size={70} opacity={0.12}/>
+            <Scarab size={80} opacity={0.38}/>
           </div>
+          {/* FIX 1: center torches */}
+          <TorchPair height={110}/>
 
           <div className="section-label" style={{color:RUST}}>About the Event</div>
           <h2 className="font-cinzel text-white" style={{fontSize:52,lineHeight:0.95,letterSpacing:2,marginBottom:14}}>What Awaits You?</h2>
@@ -496,21 +515,14 @@ export default function ScotlandYardPage() {
 
         {/* ── EVENT INFO ── */}
         <section className="section-pad" style={{padding:"96px 80px",position:"relative",overflow:"hidden"}}>
-          {/* Big pyramid bg */}
           <div style={{position:"absolute",right:-20,bottom:0,pointerEvents:"none"}} className="pyramid-section-deco">
-            <Pyramid width={340} opacity={0.1}/>
+            <Pyramid width={340} opacity={0.3}/>
           </div>
-          {/* Torches */}
-          <div style={{position:"absolute",left:20,top:"30%",pointerEvents:"none"}} className="pyramid-section-deco">
-            <Torch height={100}/>
-          </div>
-          <div style={{position:"absolute",left:20,bottom:"20%",pointerEvents:"none"}} className="pyramid-section-deco">
-            <Torch height={88}/>
-          </div>
-          {/* Obelisk */}
           <div style={{position:"absolute",right:80,top:20,pointerEvents:"none"}} className="pyramid-section-deco">
-            <Obelisk height={130} opacity={0.12}/>
+            <Obelisk height={130} opacity={0.35}/>
           </div>
+          {/* FIX 1: center torches */}
+          <TorchPair height={100}/>
 
           <div className="section-label" style={{color:GOLD}}>Event Info</div>
           <h2 className="font-cinzel text-white" style={{fontSize:52,lineHeight:0.95,letterSpacing:2,marginBottom:14}}>The Sacred Details</h2>
@@ -534,23 +546,38 @@ export default function ScotlandYardPage() {
               </div>
             ))}
           </div>
-        </section>  
+
+          {/* POC */}
+          <div style={{marginTop:48}}>
+            <div className="ornament" style={{marginBottom:28}}>Points of Contact</div>
+            <div className="flex" style={{gap:18,flexWrap:"wrap"}}>
+              {POCS.map(poc=>(
+                <div key={poc.name}
+                  style={{background:"rgba(200,134,10,0.07)",border:"1px solid rgba(200,134,10,0.15)",borderRadius:10,padding:"18px 32px",display:"flex",flexDirection:"column",gap:4}}>
+                  <div className="font-cinzel text-white" style={{fontSize:15,letterSpacing:2}}>{poc.name}</div>
+                  <div className="font-crimson" style={{fontSize:17,color:SAND}}>{poc.phone}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <HieroStrip color={STONE} glyphs={["𓁹","𓊹","𓂀","𓆣","𓅓","𓊪"]}/>
 
         {/* ── TIMELINE ── */}
         <section className="section-pad" style={{padding:"96px 80px",background:PAPYRUS,position:"relative",overflow:"hidden"}}>
-          {/* Obelisks */}
           <div style={{position:"absolute",right:60,top:20,pointerEvents:"none",display:"flex",gap:16,alignItems:"flex-start"}} className="pyramid-section-deco">
-            <Obelisk height={140} opacity={0.13}/>
-            <Obelisk height={175} opacity={0.16}/>
+            <Obelisk height={140} opacity={0.38}/>
+            <Obelisk height={175} opacity={0.42}/>
           </div>
-          {/* Scarab */}
           <div style={{position:"absolute",left:60,bottom:60,pointerEvents:"none"}} className="pyramid-section-deco">
-            <Scarab size={80} opacity={0.14}/>
+            <Scarab size={85} opacity={0.4}/>
           </div>
-          {/* Eye of Ra */}
           <div className="anim-eyePulse pyramid-section-deco" style={{position:"absolute",left:"50%",top:30,transform:"translateX(-50%)",pointerEvents:"none"}}>
-            <EyeOfRa size={150} opacity={0.1}/>
+            <EyeOfRa size={150} opacity={0.3}/>
           </div>
+          {/* FIX 1: center torches */}
+          <TorchPair height={105}/>
 
           <div className="section-label" style={{color:RUST}}>The Trials</div>
           <h2 className="font-cinzel text-white" style={{fontSize:52,lineHeight:0.95,letterSpacing:2,marginBottom:14}}>Five Chambers</h2>
@@ -576,65 +603,58 @@ export default function ScotlandYardPage() {
 
         {/* Sand dunes into CTA */}
         <div style={{background:`linear-gradient(130deg,${PAPYRUS} 0%,${INK} 100%)`,marginTop:-2}}>
-          <SandDunes opacity={0.22}/>
+          <SandDunes opacity={0.3}/>
         </div>
         <HieroStrip color={GOLD} glyphs={["𓂋","𓅱","𓇯","𓈖","𓊹","𓁹"]}/>
 
         {/* ── CTA ── */}
         <section className="cta-bg text-center relative overflow-hidden"
           style={{padding:"130px 20px",background:`linear-gradient(130deg,${PAPYRUS} 0%,${INK} 100%)`}}>
-          {/* Giant gold pyramid behind */}
-          <div style={{position:"absolute",bottom:0,left:"50%",transform:"translateX(-50%)",pointerEvents:"none",opacity:0.08}}>
+          <div style={{position:"absolute",bottom:0,left:"50%",transform:"translateX(-50%)",pointerEvents:"none",opacity:0.18}}>
             <Pyramid width={600} gold/>
           </div>
-          {/* Side mummies */}
           <div style={{position:"absolute",left:"5%",bottom:0,pointerEvents:"none"}} className="pyramid-section-deco">
-            <Mummy width={68} opacity={0.2}/>
+            <Mummy width={68} opacity={0.45}/>
           </div>
           <div style={{position:"absolute",right:"5%",bottom:0,pointerEvents:"none"}} className="pyramid-section-deco">
-            <Mummy width={68} opacity={0.2}/>
+            <Mummy width={68} opacity={0.45}/>
           </div>
-          {/* Eye above */}
           <div className="anim-eyePulse pyramid-section-deco" style={{position:"absolute",top:20,left:"50%",transform:"translateX(-50%)",pointerEvents:"none"}}>
-            <EyeOfRa size={180} opacity={0.13}/>
+            <EyeOfRa size={180} opacity={0.3}/>
           </div>
-          {/* Side obelisks */}
           <div style={{position:"absolute",left:"17%",bottom:0,pointerEvents:"none"}} className="pyramid-section-deco">
-            <Obelisk height={120} opacity={0.15}/>
+            <Obelisk height={120} opacity={0.38}/>
           </div>
           <div style={{position:"absolute",right:"17%",bottom:0,pointerEvents:"none"}} className="pyramid-section-deco">
-            <Obelisk height={120} opacity={0.15}/>
+            <Obelisk height={120} opacity={0.38}/>
           </div>
-          {/* Flanking torches */}
-          <div style={{position:"absolute",left:"8%",top:"30%",pointerEvents:"none"}} className="pyramid-section-deco">
-            <Torch height={110}/>
-          </div>
-          <div style={{position:"absolute",right:"8%",top:"30%",pointerEvents:"none"}} className="pyramid-section-deco">
-            <Torch height={110}/>
-          </div>
+          {/* FIX 1: center torches */}
+          <TorchPair height={120}/>
 
           <div className="relative z-10">
             <div className="flex justify-center" style={{marginBottom:20}}>
-              <Ankh size={50} opacity={0.5}/>
+              <Ankh size={50} opacity={0.65}/>
             </div>
-            <div className="ornament" style={{marginBottom:24,maxWidth:400,margin:"0 auto 24px"}}>THE HOUR IS AT HAND</div>
+            <div className="ornament" style={{marginBottom:24,maxWidth:400,margin:"0 auto 24px"}}>THE FINAL VERDICT</div>
+            {/* FIX 4: new catchy phrase */}
             <h2 className="font-cinzel text-white"
               style={{fontSize:"clamp(48px,6vw,78px)",letterSpacing:3,marginBottom:14,textShadow:"3px 3px 0 rgba(0,0,0,0.3)"}}>
-              Do You Dare Enter?
+              The Dead Don&apos;t Wait.
             </h2>
             <p className="font-crimson" style={{fontSize:18,color:"rgba(232,200,122,0.45)",marginBottom:44,fontWeight:300,fontStyle:"italic"}}>
-              The afterlife awaits. Prove your worth and claim eternal glory.
+              Osiris has opened his ledger. Your name is already written — the question is which side.
             </p>
             <button className="btn-egypt">Register Now</button>
           </div>
         </section>
 
         {/* ── FOOTER ── */}
+        {/* FIX 5: brighter footer text */}
         <footer className="footer-inner flex items-center justify-between"
           style={{background:"#04030A",padding:"28px 80px",minHeight:80,borderTop:`2px solid rgba(200,134,10,0.2)`}}>
           <div>
             <div className="font-cinzel" style={{fontSize:15,letterSpacing:5,color:GOLD}}>ISTE NITK</div>
-            <div className="font-crimson" style={{fontSize:12,color:"rgba(255,255,255,0.2)",marginTop:3}}>
+            <div className="font-crimson" style={{fontSize:12,color:"rgba(255,255,255,0.55)",marginTop:3}}>
               Indian Society for Technical Education · NITK Surathkal
             </div>
           </div>
@@ -642,7 +662,7 @@ export default function ScotlandYardPage() {
             {["Home","Events","Instagram","Contact"].map(l=>(
               <a key={l} href="#"
                 className="no-underline font-cinzel transition-colors duration-200 hover:text-[#C8860A]"
-                style={{fontSize:10,letterSpacing:3,textTransform:"uppercase",color:"rgba(255,255,255,0.2)"}}>
+                style={{fontSize:10,letterSpacing:3,textTransform:"uppercase",color:"rgba(255,255,255,0.55)"}}>
                 {l}
               </a>
             ))}
@@ -650,6 +670,6 @@ export default function ScotlandYardPage() {
         </footer>
 
       </div>
-    </>
+    </div>
   );
 }
