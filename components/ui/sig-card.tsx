@@ -33,6 +33,35 @@ export function SigCard({ title, description, iconPath, delay = 0 }: SigCardProp
     };
   }, []);
 
+  useEffect(() => {
+    const syncHeights = () => {
+      const cards = Array.from(document.querySelectorAll<HTMLElement>("[data-sig-card='true']"));
+      if (!cards.length) return;
+
+      cards.forEach((card) => {
+        card.style.minHeight = "";
+      });
+
+      let maxHeight = 0;
+      cards.forEach((card) => {
+        maxHeight = Math.max(maxHeight, card.offsetHeight);
+      });
+
+      cards.forEach((card) => {
+        card.style.minHeight = `${maxHeight}px`;
+      });
+    };
+
+    syncHeights();
+    const timeoutId = window.setTimeout(syncHeights, 120);
+    window.addEventListener("resize", syncHeights);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+      window.removeEventListener("resize", syncHeights);
+    };
+  }, [description]);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -41,7 +70,8 @@ export function SigCard({ title, description, iconPath, delay = 0 }: SigCardProp
       transition={{ duration: 0.7, delay: delay, ease: "easeOut" }}
       whileHover={canHover ? { y: -5, scale: 1.02 } : undefined}
       style={{ contain: "layout paint" }}
-      className="relative group cursor-pointer w-full aspect-square transform-gpu rounded-2xl"
+      data-sig-card="true"
+      className="relative group h-full w-full cursor-pointer transform-gpu rounded-2xl"
     >
       <div className="absolute inset-0 rounded-2xl border border-teal-400/40 shadow-[0_0_26px_rgba(20,241,217,0.22)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
       
@@ -64,7 +94,7 @@ export function SigCard({ title, description, iconPath, delay = 0 }: SigCardProp
             {title}
           </h3>
           
-          <p className="text-slate-400 leading-relaxed text-sm line-clamp-4 min-h-20">
+          <p className="text-sm leading-relaxed text-slate-400">
             {description}
           </p>
         </div>

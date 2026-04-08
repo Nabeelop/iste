@@ -26,36 +26,40 @@ const row2 = companies.slice(8, 15);
 
 export default function Companies() {
   return (
-    <section className="relative w-full py-20 overflow-hidden bg-transparent">
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-10 left-1/4 w-2 h-2 bg-teal-400 rounded-full animate-pulse shadow-[0_0_10px_#2dd4bf]"></div>
-        <div className="absolute bottom-20 right-1/4 w-3 h-3 bg-teal-400 rounded-full animate-pulse shadow-[0_0_15px_#2dd4bf]" style={{ animationDelay: "1s" }}></div>
-        <div className="absolute top-1/2 right-10 w-1.5 h-1.5 bg-white rounded-full animate-pulse shadow-[0_0_8px_white]" style={{ animationDelay: "0.5s" }}></div>
+    <section className="relative w-full overflow-hidden bg-transparent py-20">
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <div
+          className="absolute bottom-20 right-1/4 h-3 w-3 animate-pulse rounded-full bg-teal-400 shadow-[0_0_15px_#2dd4bf]"
+          style={{ animationDelay: "1s" }}
+        />
+        <div
+          className="absolute right-10 top-1/2 h-1.5 w-1.5 animate-pulse rounded-full bg-white shadow-[0_0_8px_white]"
+          style={{ animationDelay: "0.5s" }}
+        />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold tracking-wide text-white uppercase flex flex-col items-center justify-center">
+      <div className="container relative z-10 mx-auto px-4">
+        <div className="mb-16 text-center">
+          <h2 className="flex flex-col items-center justify-center text-3xl font-bold tracking-tight text-white md:text-5xl">
             <span className="relative inline-block">
-              <span className="absolute -inset-1 border-t-2 border-dashed border-teal-400/30 rounded-[100%]"></span>
               Our <span className="text-teal-400 drop-shadow-[0_0_10px_rgba(45,212,191,0.8)]">Cosmic</span> Network
             </span>
           </h2>
-          <div className="h-1 w-24 bg-teal-400 mx-auto mt-4 rounded-full shadow-[0_0_8px_#2dd4bf]"></div>
+          <div className="mx-auto mt-4 h-1 w-24 rounded-full bg-linear-to-r from-teal-400 to-transparent" />
         </div>
 
         <div className="relative flex flex-col gap-6">
-          <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-black to-transparent z-20 pointer-events-none"></div>
-          <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-black to-transparent z-20 pointer-events-none"></div>
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-24 bg-linear-to-r from-black to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-24 bg-linear-to-l from-black to-transparent" />
 
           <div className="flex overflow-hidden">
-            <div className="flex gap-6 animate-marquee-left hover:[animation-play-state:paused] py-4 pr-6">
+            <div className="animate-marquee-left flex gap-6 py-4 pr-6 hover:[animation-play-state:paused]">
               {[...row1, ...row1].map((company, i) => (
                 <div
                   key={`r1-${i}`}
-                  className={`flex-shrink-0 flex flex-col items-center justify-center gap-3 w-48 h-28 bg-white/[0.03] backdrop-blur-md border border-white/10 rounded-xl transition-all duration-300 group cursor-pointer ${company.color}`}
+                  className={`group flex h-28 w-48 shrink-0 cursor-pointer flex-col items-center justify-center gap-3 rounded-xl border border-white/10 bg-white/3 backdrop-blur-md transition-all duration-300 ${company.color}`}
                 >
-                  <div className="relative w-12 h-12 opacity-60 group-hover:opacity-100 grayscale group-hover:grayscale-0 transition-all duration-300">
+                  <div className="relative h-12 w-12 transition-all duration-300 group-hover:scale-105">
                     <Image
                       src={company.logo}
                       alt={`${company.name} logo`}
@@ -63,7 +67,7 @@ export default function Companies() {
                       className="object-contain"
                     />
                   </div>
-                  <span className="text-white/70 font-semibold tracking-wider text-xs uppercase group-hover:text-white transition-colors">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-white/70 transition-colors group-hover:text-white">
                     {company.name}
                   </span>
                 </div>
@@ -72,13 +76,13 @@ export default function Companies() {
           </div>
 
           <div className="flex overflow-hidden">
-            <div className="flex gap-6 animate-marquee-right hover:[animation-play-state:paused] py-4 pr-6">
+            <div className="animate-marquee-right flex gap-6 py-4 pr-6 hover:[animation-play-state:paused]">
               {[...row2, ...row2].map((company, i) => (
                 <div
                   key={`r2-${i}`}
-                  className={`flex-shrink-0 flex flex-col items-center justify-center gap-3 w-48 h-28 bg-white/[0.03] backdrop-blur-md border border-white/10 rounded-xl transition-all duration-300 group cursor-pointer ${company.color}`}
+                  className={`group flex h-28 w-48 shrink-0 cursor-pointer flex-col items-center justify-center gap-3 rounded-xl border border-white/10 bg-white/3 backdrop-blur-md transition-all duration-300 ${company.color}`}
                 >
-                  <div className="relative w-12 h-12 opacity-60 group-hover:opacity-100 grayscale group-hover:grayscale-0 transition-all duration-300">
+                  <div className="relative h-12 w-12 transition-all duration-300 group-hover:scale-105">
                     <Image
                       src={company.logo}
                       alt={`${company.name} logo`}
@@ -86,7 +90,7 @@ export default function Companies() {
                       className="object-contain"
                     />
                   </div>
-                  <span className="text-white/70 font-semibold tracking-wider text-xs uppercase group-hover:text-white transition-colors">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-white/70 transition-colors group-hover:text-white">
                     {company.name}
                   </span>
                 </div>
@@ -96,24 +100,28 @@ export default function Companies() {
         </div>
       </div>
 
-      <style dangerouslySetInnerHTML={{ __html: `
-        @keyframes marqueeLeft {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        @keyframes marqueeRight {
-          0% { transform: translateX(-50%); }
-          100% { transform: translateX(0); }
-        }
-        .animate-marquee-left {
-          animation: marqueeLeft 30s linear infinite;
-          width: max-content;
-        }
-        .animate-marquee-right {
-          animation: marqueeRight 30s linear infinite;
-          width: max-content;
-        }
-      `}} />
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+            @keyframes marqueeLeft {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            @keyframes marqueeRight {
+              0% { transform: translateX(-50%); }
+              100% { transform: translateX(0); }
+            }
+            .animate-marquee-left {
+              animation: marqueeLeft 30s linear infinite;
+              width: max-content;
+            }
+            .animate-marquee-right {
+              animation: marqueeRight 30s linear infinite;
+              width: max-content;
+            }
+          `,
+        }}
+      />
     </section>
   );
 }

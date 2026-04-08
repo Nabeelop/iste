@@ -29,7 +29,7 @@ export const SolarSystem = () => {
       radius: 200,
       speed: 20,
       image: Events[0].image || '/scotland_yard.jpeg',
-      link: Events[0].link || '/events/scotland-yard'
+      link: Events[0].link || '/events/scotlandyard'
     },
     {
       id: 1,
@@ -38,7 +38,7 @@ export const SolarSystem = () => {
       radius: 360,
       speed: 28,
       image: Events[1].image || '/square_one.jpeg',
-      link: Events[1].link || '/events/square-one'
+      link: Events[1].link || '/events/squareone'
     },
     {
       id: 2,
@@ -81,11 +81,12 @@ export const SolarSystem = () => {
 
   return (
     <div className="w-full min-h-screen flex items-center justify-center relative bg-transperant overflow-hidden py-16">
-      {/* EVENTS Header */}
-      <div className="absolute top-24 left-1/2 transform -translate-x-1/2 z-40">
-        <h1 className="text-4xl md:text-6xl font-black tracking-[0.25em] text-white drop-shadow-[0_0_15px_rgba(0,229,255,0.4)]">
-          EVENTS
+      {/* Events Header */}
+      <div className="absolute top-24 left-1/2 transform -translate-x-1/2 z-40 text-center">
+        <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white drop-shadow-[0_0_15px_rgba(0,229,255,0.4)]">
+          Events
         </h1>
+        <div className="w-24 h-1 bg-linear-to-r from-teal-400 to-transparent rounded-full mx-auto mt-4" />
       </div>
       <style>{`
         @keyframes orbit-0 {

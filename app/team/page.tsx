@@ -80,19 +80,19 @@ export default function TeamPage() {
             <div className="pt-2">
               <h4 className="border-l-2 border-teal-400 pl-4 text-sm font-bold uppercase tracking-widest text-white">Socials</h4>
               <div className="mt-4 flex flex-wrap items-center gap-4">
-                <a href="#" aria-label="X" className="rounded-full bg-white/5 p-3 text-slate-400 transition-all duration-300 hover:bg-teal-400/20 hover:text-teal-400">
+                <a href="https://x.com/ISTE_NITK?s=20" target="_blank" rel="noreferrer" aria-label="X" className="rounded-full bg-white/5 p-3 text-slate-400 transition-all duration-300 hover:bg-teal-400/20 hover:text-teal-400">
                   <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
                 </a>
-                <a href="#" aria-label="Instagram" className="rounded-full bg-white/5 p-3 text-slate-400 transition-all duration-300 hover:bg-teal-400/20 hover:text-teal-400">
+                <a href="https://www.instagram.com/istenitk/" target="_blank" rel="noreferrer" aria-label="Instagram" className="rounded-full bg-white/5 p-3 text-slate-400 transition-all duration-300 hover:bg-teal-400/20 hover:text-teal-400">
                   <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.332 3.608 1.29.96.953 1.242 2.235 1.306 3.593.058 1.284.07 1.65.07 4.884 0 3.235-.012 3.603-.07 4.883-.064 1.358-.346 2.64-1.306 3.593-.975.958-2.242 1.228-3.608 1.29-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.332-3.608-1.29-.96-.953-1.242-2.235-1.306-3.593-.058-1.284-.07-1.65-.07-4.884 0-3.235.012-3.603.07-4.883.064-1.359.346-2.64 1.306-3.593.975-.958 2.242-1.228 3.608-1.29 1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-1.28.058-2.152.261-2.917.558-.79.307-1.46.717-2.128 1.385s-1.078 1.338-1.385 2.128c-.297.765-.5 1.637-.558 2.917-.058 1.28-.072 1.688-.072 4.947s.014 3.667.072 4.947c.058 1.28.261 2.152.558 2.917.307.79.717 1.46 1.385 2.128s1.338 1.078 2.128 1.385c.765.297 1.637.5 2.917.558 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c1.28-.058 2.152-.261 2.917-.558.79-.307 1.46-.717 2.128-1.385s1.078-1.338 1.385-2.128c.297-.765.5-1.637.558-2.917.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.058-1.28-.261-2.152-.558-2.917a4.91 4.91 0 00-1.385-2.128c-.668-.668-1.338-1.078-2.128-1.385-.765-.297-1.637-.5-2.917-.558-1.28-.058-1.688-.072-4.947-.072zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z" /></svg>
                 </a>
-                <a href="#" aria-label="LinkedIn" className="rounded-full bg-white/5 p-3 text-slate-400 transition-all duration-300 hover:bg-teal-400/20 hover:text-teal-400">
+                <a href="https://www.linkedin.com/company/istenitk/" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="rounded-full bg-white/5 p-3 text-slate-400 transition-all duration-300 hover:bg-teal-400/20 hover:text-teal-400">
                   <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path fillRule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clipRule="evenodd" /></svg>
                 </a>
-                <a href="#" aria-label="Facebook" className="rounded-full bg-white/5 p-3 text-slate-400 transition-all duration-300 hover:bg-teal-400/20 hover:text-teal-400">
+                <a href="https://www.facebook.com/istenitk" target="_blank" rel="noreferrer" aria-label="Facebook" className="rounded-full bg-white/5 p-3 text-slate-400 transition-all duration-300 hover:bg-teal-400/20 hover:text-teal-400">
                   <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12.073C22 6.503 17.523 2 12 2S2 6.503 2 12.073c0 5.03 3.657 9.2 8.438 9.957v-7.042H7.898v-2.915h2.54V9.845c0-2.52 1.492-3.914 3.777-3.914 1.094 0 2.238.196 2.238.196v2.476h-1.26c-1.243 0-1.63.773-1.63 1.566v1.88h2.773l-.443 2.915h-2.33v7.042C18.343 21.273 22 17.103 22 12.073z" /></svg>
                 </a>
-                <a href="#" aria-label="GitHub" className="rounded-full bg-white/5 p-3 text-slate-400 transition-all duration-300 hover:bg-teal-400/20 hover:text-teal-400">
+                <a href="https://github.com/istenitk" target="_blank" rel="noreferrer" aria-label="GitHub" className="rounded-full bg-white/5 p-3 text-slate-400 transition-all duration-300 hover:bg-teal-400/20 hover:text-teal-400">
                   <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5C5.649.5.5 5.649.5 12a11.5 11.5 0 008 10.93c.586.108.8-.255.8-.567v-2.02c-3.252.707-3.938-1.566-3.938-1.566-.533-1.356-1.302-1.718-1.302-1.718-1.065-.729.081-.714.081-.714 1.178.083 1.798 1.209 1.798 1.209 1.046 1.792 2.744 1.275 3.413.975.106-.758.41-1.275.746-1.568-2.596-.295-5.326-1.298-5.326-5.778 0-1.276.456-2.319 1.205-3.137-.12-.296-.523-1.487.114-3.1 0 0 .984-.315 3.225 1.198A11.22 11.22 0 0112 6.175c.994.005 1.995.134 2.93.393 2.24-1.513 3.223-1.198 3.223-1.198.638 1.613.235 2.804.116 3.1.75.818 1.203 1.86 1.203 3.137 0 4.492-2.735 5.48-5.34 5.77.422.364.798 1.08.798 2.177v3.227c0 .315.212.68.806.565A11.5 11.5 0 0023.5 12C23.5 5.649 18.351.5 12 .5z" /></svg>
                 </a>
               </div>
@@ -127,7 +127,7 @@ export default function TeamPage() {
                 <span className="text-sm font-medium tracking-wide">iste@nitk.edu.in</span>
               </a>
               <a
-                href="tel:+910000000000"
+                href="tel:+917892743530"
                 aria-label="Call ISTE NITK"
                 className="group flex items-center gap-3 rounded-xl bg-white/5 p-3 text-slate-300 transition-all duration-300 hover:bg-teal-400/20 hover:text-teal-300"
               >
@@ -137,8 +137,8 @@ export default function TeamPage() {
                   </svg>
                 </span>
                 <span className="text-sm leading-tight">
-                  <span className="block font-semibold text-slate-200">Placeholder Name · Role</span>
-                  <span className="block text-slate-400 transition-colors group-hover:text-teal-200">+91 00000 00000</span>
+                  <span className="block font-semibold text-slate-200">External Affairs Coordinator</span>
+                  <span className="block text-slate-400 transition-colors group-hover:text-teal-200">+91 78927 43530</span>
                 </span>
               </a>
             </div>

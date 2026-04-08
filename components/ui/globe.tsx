@@ -53,6 +53,7 @@ interface WorldProps {
   isScrolled?: boolean; 
   allowInteraction?: boolean;
   showMangaloreRing?: boolean;
+  rotationTrigger?: number;
 }
 
 export function Globe({ globeConfig, data, isScrolled, showMangaloreRing = false }: WorldProps) {
@@ -222,7 +223,7 @@ export function Globe({ globeConfig, data, isScrolled, showMangaloreRing = false
 }
 
 // ... rest of the gimbal/camera code remains identical ...
-function SpinGroup({ isScrolled, controlsRef, children }: { isScrolled: boolean, controlsRef: any, children: React.ReactNode }) {
+function SpinGroup({ isScrolled, rotationTrigger, controlsRef, children }: { isScrolled: boolean, rotationTrigger: number, controlsRef: any, children: React.ReactNode }) {
   const spinRef = useRef<any>(null); 
   const tiltRef = useRef<any>(null); 
   const targetY = useRef<number | null>(null);
@@ -244,7 +245,7 @@ function SpinGroup({ isScrolled, controlsRef, children }: { isScrolled: boolean,
     } else {
       targetY.current = null;
     }
-  }, [isScrolled]);
+  }, [isScrolled, rotationTrigger]);
 
   useFrame((state, delta) => {
     if (!spinRef.current || !tiltRef.current) return;
@@ -284,7 +285,7 @@ export function WebGLRendererConfig() {
 }
 
 export function World(props: WorldProps) {
-  const { globeConfig, isScrolled, allowInteraction = true } = props;
+  const { globeConfig, isScrolled, allowInteraction = true, rotationTrigger = 0 } = props;
   const scene = new Scene();
   const controlsRef = useRef<any>(null); 
 
@@ -302,7 +303,7 @@ export function World(props: WorldProps) {
       <directionalLight color={globeConfig.directionalTopLight} position={new Vector3(-200, 500, 200)} intensity={1.5} />
       <pointLight color={globeConfig.pointLight} position={new Vector3(0, 0, 400)} intensity={2} />
       
-      <SpinGroup isScrolled={isScrolled || false} controlsRef={controlsRef}>
+      <SpinGroup isScrolled={isScrolled || false} rotationTrigger={rotationTrigger} controlsRef={controlsRef}>
         <Globe {...props} />
       </SpinGroup>
 

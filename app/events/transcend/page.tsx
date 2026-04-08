@@ -1,26 +1,110 @@
 "use client";
 import React from "react";
+import NavBar from "@/components/NavBar";
 
 const Y = "#F5C400", R = "#E83A2A", NK = "#0A0E1A", MK = "#111827", SLATE = "#1E2535";
+
 const STATS = [
   { icon: "📅", label: "Date",      value: "March 16–20, 2025" },
   { icon: "📍", label: "Venue",     value: "ISTE Seminar Hall" },
   { icon: "👥", label: "Team Size", value: "1–5 Members" },
   { icon: "🏆", label: "Prize Pool",value: "₹10,000" },
 ];
-const PILLARS = [
-  { icon: "🧠", name: "Innovate",  sub: "Think outside the blocks",  accent: R },
-  { icon: "🧱", name: "Build",     sub: "Create with LEGO logic",    accent: Y },
-  { icon: "⚡", name: "Compete",   sub: "Win challenges",            accent: "#4A9EFF" },
-  { icon: "🚀", name: "Transcend", sub: "Break your limits",         accent: "#00C896" },
-];
+
 const DAYS = [
-  { name: "16th", sub: "Advent of Code(team of 5)",    color: Y,         tc: NK    },
-  { name: "17th", sub: "Watt the Hangover(Team of 4 Mandatory)", color: SLATE,     tc: "#fff" },
-  { name: "18th", sub: "Harry Potter and the Cursed Water (Team of 3)",      color: R,         tc: "#fff" },
-  { name: "19th", sub: "32nd Avenue(Team of 3–4)",       color: SLATE,     tc: "#fff" },
-  { name: "20th", sub: "CAD-A-THON(Team of 2–3)",        color: "#006B3C", tc: "#fff" },
+  { name: "16th", sub: "Advent of Code (team of 5)",             color: Y,         tc: NK    },
+  { name: "17th", sub: "Watt the Hangover (Team of 4 Mandatory)",color: Y,     tc: "#fff" },
+  { name: "18th", sub: "Harry Potter and the Cursed Water (Team of 3)", color: R,  tc: "#fff" },
+  { name: "19th", sub: "32nd Avenue (Team of 3–4)",              color: SLATE,     tc: "#fff" },
+  { name: "20th", sub: "CAD-A-THON (Team of 2–3)",               color: "#006B3C", tc: "#fff" },
 ];
+
+const EVENT_IMAGES = [
+  {
+    src: "/transcend/codeofadvert.jpeg",
+    title: "Advent of Code",
+    description: "A competitive programming sprint from Crypt. New problems drop every 15 minutes, pushing coders to stay sharp and climb the leaderboard.",
+  },
+  {
+    src: "/transcend/watt.jpeg",
+    title: "Watt the Hangover",
+    description: "Teams collect points answering questions on circuits and electronics. Every decision counts when strategy and technical expertise collide.",
+  },
+  {
+    src: "/transcend/harry.jpeg",
+    title: "Harry Potter & the Cursed Water",
+    description: "Teams take on magical challenges to collect ingredients and brew the potion that could save him. Strategy, speed, and a lil bit of wizardry will decide who wins.",
+  },
+  {
+    src: "/transcend/32nd.jpeg",
+    title: "32nd Avenue",
+    description: "The high-stakes world of Monopoly & real estate in action — a fast-paced simulation of negotiation, development, and strategy. Navigate the market and watch out for deals that might not be what they seem.",
+  },
+  {
+    src: "/transcend/cad.jpeg",
+    title: "CAD-A-THON",
+    description: "Tests your Rapid Prototyping and Creative Logical thinking through a quiz round followed by a 20-hour CAD sprint. Design, prototype, and bring your creativity to life using Autodesk Fusion 360.",
+  },
+];
+
+const WINNERS = [
+  {
+    event: "Advent of Code",
+    color: Y,
+    tc: NK,
+    podium: [
+      { place: "1st", label: "Nethunters", members: ["Mayank Kothari","Sudarshan Sinha","Rishabh Mishra","Supreeth R M","P J Abhilash"] },
+      { place: "2nd", label: "Excess Skill Issue", members: ["Ashish","Pritham Noronha","Chinmaya Sahu","Chirag R","Dhanush Nayak","Muhammad Khalandar"] },
+      { place: "3rd", label: "Incigo", members: ["Raj Bhalse","Manraj Singh","Aditya Saraswat","Kavish Gupta","Mohammad Razeen"] },
+    ],
+  },
+  {
+    event: "Harry Potter and the Cursed Water",
+    color: R,
+    tc: "#fff",
+    podium: [
+      { place: "1st", label: "CATALYST – eyes", members: ["Arnavraj","Devansh","Yudveer"] },
+      { place: "2nd", label: "Order of the Phoenix", members: ["Ananth B","Aryan Rajak","Pratham Gadiyar"] },
+      { place: "3rd", label: "A to Z DSA Course", members: ["Paritosh Naithani","Keshave","Reyansh"] },
+    ],
+  },
+  {
+    event: "Watt the Hangover",
+    color: Y,
+    tc: Y,
+    podium: [
+      { place: "1st", label: "E SEE E", members: ["Amogh S Nadig","Sanath Chandra Mokkapati","Hemesh Rao Pole","Sai Sharan S K"] },
+      { place: "2nd", label: "SEQ AND SERIES", members: ["Ananya Devadiga","Sharnika","Anahita","Harshit Kumar"] },
+      { place: "3rd", label: "Last Minute Airbenders", members: ["Prajna G Rao","Shraddha Iti","Pooja Pranathi"] },
+    ],
+  },
+  {
+    event: "CAD-A-THON",
+    color: "#006B3C",
+    tc: "#fff",
+    podium: [
+      { place: "1st", label: "NEGATIVE SAFETY FACTOR", members: ["Ninad","Abhishek","Ashwin"] },
+      { place: "2nd", label: "CADILLAC", members: ["Dron","Nilay"] },
+      { place: "3rd", label: "ANONYMOUS", members: ["Vihan"] },
+    ],
+  },
+  {
+    event: "32nd Avenue",
+    color: Y,
+    tc: "#fff",
+    podium: [
+      { place: "1st", label: "PRACHAND JWALA", members: ["Suyash","Dhruv","Shivam","Mehul"] },
+      { place: "2nd", label: "LIVICE", members: ["Anubhav","Tanush","Kaushik","Harish"] },
+      { place: "3rd", label: "CONCRETE SYNDICATE", members: ["Ayush Jaiswal","Ayush Anand","Garvit Biloniya","Shaleeth","Joseph Matthews"] },
+    ],
+  },
+];
+
+const PLACE_COLORS: Record<string, { bg: string; label: string }> = {
+  "1st": { bg: Y,       label: NK   },
+  "2nd": { bg: "#C0C0C0", label: NK },
+  "3rd": { bg: "#CD7F32", label: NK },
+};
 
 const CSS = `
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,600;0,700&display=swap');
@@ -46,7 +130,6 @@ const CSS = `
 .delay-3 { animation-delay: 1.7s; }
 .delay-4 { animation-delay: 2.2s; }
 
-/* dot grid backgrounds */
 .hero-dot-bg {
   position: absolute; inset: 0;
   background-image: radial-gradient(rgba(245,196,0,0.18) 1.5px, transparent 1.5px);
@@ -61,7 +144,6 @@ const CSS = `
   opacity: 0.4;
 }
 
-/* lego block studs */
 .lego-block {
   position: relative;
   animation: float 4s ease-in-out infinite;
@@ -75,7 +157,47 @@ const CSS = `
   box-shadow: 22px 0 0 currentColor, 44px 0 0 currentColor;
 }
 
-/* card top accent bar via CSS var */
+/* Image hover overlay */
+.img-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  cursor: pointer;
+}
+.img-card img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.img-card:hover img { transform: scale(1.07); }
+.img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+}
+.img-card:hover .img-overlay { opacity: 1; }
+.img-overlay h4 {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 22px;
+  letter-spacing: 2px;
+  color: #F5C400;
+  margin-bottom: 6px;
+}
+.img-overlay p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.5;
+}
+
 .card-accent {
   position: relative; overflow: hidden;
   transition: transform 0.25s ease, background 0.2s, box-shadow 0.25s;
@@ -89,7 +211,6 @@ const CSS = `
 .card-accent:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.45); }
 .card-accent:hover::before { opacity: 1; }
 
-/* timeline node connector */
 .t-node { position: relative; transition: background 0.2s; }
 .t-node::after {
   content: ''; position: absolute;
@@ -99,7 +220,6 @@ const CSS = `
 .t-node:last-child::after { display: none; }
 .t-node:last-child { border-right: none !important; }
 
-/* stud strip */
 .stud-strip {
   display: flex; overflow: hidden; height: 22px;
   border-top: 2px solid rgba(0,0,0,0.4);
@@ -112,41 +232,112 @@ const CSS = `
   background: rgba(255,255,255,0.18);
 }
 
-/* responsive */
+/* Winner cards */
+.winner-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.winner-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+.place-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 16px;
+  flex-shrink: 0;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+}
+.member-chip {
+  display: inline-block;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 3px 12px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.72);
+  margin: 3px;
+}
+
 @media(max-width: 960px) {
-  .lego-stack { display: none !important; }
-  .nav-links-wrap { display: none !important; }
   .hero-inner { padding: 80px 24px 120px !important; }
   .stats-strip-grid { grid-template-columns: 1fr 1fr !important; }
   .section-pad { padding: 72px 24px !important; }
   .timeline-flex { flex-direction: column !important; border-radius: 14px !important; }
   .t-node { border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.06) !important; }
   .footer-inner { padding: 24px !important; flex-direction: column; gap: 20px; text-align: center; }
+  .hero-lego-top, .hero-lego-bottom { display: none !important; }
+  .winners-grid { grid-template-columns: 1fr !important; }
+  .images-grid { grid-template-columns: 1fr 1fr !important; }
 }
 `;
 
 export default function TranscendPage() {
   return (
     <>
+      
       <style>{CSS}</style>
-      <div className="font-dm overflow-x-hidden antialiased" style={{ background: NK, color: "#fff" }}>
+      <NavBar />
+      <div className="font-dm overflow-x-hidden antialiased" style={{ background: NK, color: "#fff", paddingTop:"100px" }}>
 
         <section
-          className="hero-inner relative flex items-center overflow-hidden"
-          style={{ minHeight: "95vh", padding: "100px 80px", background: `linear-gradient(120deg, ${NK} 0%, ${MK} 100%)` }}
+          className="hero-inner relative flex flex-col items-center justify-center overflow-hidden"
+          style={{ minHeight: "95vh", padding: "100px 80px", background: `linear-gradient(120deg, ${NK} 0%, ${MK} 100%)`, textAlign: "center" }}
         >
           <div className="hero-dot-bg" />
+
+          {/* LEGO blocks — TOP LEFT vertical stack */}
+          <div
+            className="hero-lego-top absolute flex flex-col z-10"
+            style={{ top: 40, left: 60, gap: 14 }}
+          >
+            {[Y, SLATE, R, "#006B3C", Y].map((bg, i) => (
+              <div
+                key={i}
+                className={`lego-block delay-${i % 5}`}
+                style={{ width: 160, height: 40, borderRadius: 8, background: bg }}
+              />
+            ))}
+          </div>
+
+          {/* LEGO blocks — BOTTOM LEFT vertical stack */}
+          
+
+          {/* LEGO blocks — TOP RIGHT vertical stack */}
+          
+
+          {/* LEGO blocks — BOTTOM RIGHT vertical stack */}
+          <div
+            className="hero-lego-bottom absolute flex flex-col z-10"
+            style={{ bottom: 40, right: 60, gap: 14 }}
+          >
+            {["#006B3C", R, Y, SLATE, "#006B3C"].map((bg, i) => (
+              <div
+                key={i}
+                className={`lego-block delay-${i % 5}`}
+                style={{ width: 160, height: 40, borderRadius: 8, background: bg }}
+              />
+            ))}
+          </div>
+
+          {/* Glow */}
           <div
             className="absolute pointer-events-none rounded-full"
             style={{
-              left: -160, top: "50%", transform: "translateY(-50%)",
-              width: 560, height: 560,
-              background: "radial-gradient(circle, rgba(245,196,0,0.08) 0%, transparent 70%)",
+              left: "50%", top: "50%", transform: "translate(-50%, -50%)",
+              width: 600, height: 600,
+              background: "radial-gradient(circle, rgba(245,196,0,0.07) 0%, transparent 70%)",
             }}
           />
 
-          <div className="relative z-10" style={{ maxWidth: 620 }}>
-            {/* badge */}
+          <div className="relative z-10" style={{ maxWidth: 680 }}>
             <div
               className="inline-flex items-center gap-2 rounded-full font-semibold uppercase"
               style={{ border: "1px solid rgba(245,196,0,0.35)", padding: "6px 18px", marginBottom: 28, fontSize: 15, letterSpacing: 3, color: Y }}
@@ -165,7 +356,7 @@ export default function TranscendPage() {
               style={{ fontSize: 20, letterSpacing: 10, color: "rgba(255,255,255,0.38)", marginBottom: 22 }}
             >BUILD · BREAK · BEYOND</span>
 
-            <p style={{ color: "rgba(255,255,255,0.55)", maxWidth: 460, lineHeight: 1.85, fontSize: 18, fontWeight: 300, marginBottom: 36 }}>
+            <p style={{ color: "rgba(255,255,255,0.55)", maxWidth: 460, lineHeight: 1.85, fontSize: 18, fontWeight: 300, marginBottom: 36, margin: "0 auto 36px" }}>
               A week of high-stakes strategy, technical challenges, and cinematic chaos.
               Five explosive days testing creativity, teamwork, and quick thinking.
             </p>
@@ -181,25 +372,8 @@ export default function TranscendPage() {
               }}
               onMouseEnter={e => { const b = e.currentTarget as HTMLButtonElement; b.style.transform = "translateY(-3px)"; b.style.boxShadow = "0 14px 36px rgba(245,196,0,0.35)"; b.style.borderBottomWidth = "3px"; }}
               onMouseLeave={e => { const b = e.currentTarget as HTMLButtonElement; b.style.transform = "none"; b.style.boxShadow = "0 8px 30px rgba(245,196,0,0.25)"; b.style.borderBottomWidth = "4px"; }}
-            >Register Now</button>
+            >completed</button>
           </div>
-
-          {/* LEGO BLOCKS */}
-          <div
-            className="lego-stack absolute flex-col z-10"
-            style={{ right: 80, top: "50%", transform: "translateY(-50%)", display: "flex", gap: 16 }}
-          >
-            {[
-              { bg: Y,         delay: "delay-0" },
-              { bg: SLATE,     delay: "delay-1" },
-              { bg: "#253555", delay: "delay-2" },
-              { bg: R,         delay: "delay-3" },
-              { bg: Y,         delay: "delay-4" },
-            ].map(({ bg, delay }, i) => (
-              <div key={i} className={`lego-block ${delay}`} style={{ width: 180, height: 46, borderRadius: 9, background: bg }} />
-            ))}
-          </div>
-
         </section>
 
         <StudStrip color={SLATE} />
@@ -212,21 +386,18 @@ export default function TranscendPage() {
             Transcend is ISTE NITK&apos;s flagship event designed to push your limits —
             from brainstorming to brick-building, every step brings you closer to championship glory.
           </p>
-          <div className="grid mt-2" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(210px, 1fr))", gap: 18 }}>
-            {PILLARS.map(p => (
-              <div
-                key={p.name}
-                className="card-accent backdrop-blur-sm"
-                style={{
-                  "--accent": p.accent,
-                  background: "rgba(255,255,255,0.03)",
-                  border: "1px solid rgba(255,255,255,0.07)",
-                  padding: "28px 24px 24px", borderRadius: 14,
-                } as React.CSSProperties}
-              >
-                <span style={{ fontSize: 30, marginBottom: 14, display: "block" }}>{p.icon}</span>
-                <h3 className="font-bebas text-white" style={{ fontSize: 22, letterSpacing: 1.5, marginBottom: 6 }}>{p.name}</h3>
-                <p style={{ fontSize: 13, color: "rgba(255,255,255,0.42)", lineHeight: 1.7 }}>{p.sub}</p>
+          {/* 5 image cards */}
+          <div
+            className="images-grid"
+            style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 16 }}
+          >
+            {EVENT_IMAGES.map((img) => (
+              <div key={img.title} className="img-card">
+                <img src={img.src} alt={img.title} />
+                <div className="img-overlay">
+                  <h4>{img.title}</h4>
+                  <p>{img.description}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -295,38 +466,71 @@ export default function TranscendPage() {
                 <p style={{ fontSize: 18, color: "rgba(255,255,255,0.35)", lineHeight: 1.5 }}>{d.sub}</p>
               </div>
             ))}
-            
           </div>
-          
         </section>
 
         <StudStrip color={Y} />
 
-        {/* ── CTA ── */}
+        {/* ── WINNERS ── */}
         <section
-          className="cta-dot-bg text-center relative overflow-hidden border-t border-[rgba(255,255,255,0.04)]"
-          style={{ padding: "120px 20px", background: `linear-gradient(120deg, ${MK} 0%, ${NK} 100%)` }}
+          className="cta-dot-bg relative overflow-hidden border-t border-[rgba(255,255,255,0.04)]"
+          style={{ padding: "100px 80px", background: `linear-gradient(120deg, ${MK} 0%, ${NK} 100%)` }}
         >
           <div className="relative z-10">
+            <div className="font-bebas uppercase text-center" style={{ fontSize: 15, letterSpacing: 5, color: Y, marginBottom: 10 }}>Hall of Fame</div>
             <h2
-              className="font-bebas text-white"
-              style={{ fontSize: "clamp(52px, 7vw, 84px)", letterSpacing: 4, marginBottom: 14, textShadow: "3px 3px 0 rgba(0,0,0,0.2)" }}
-            >Ready to Transcend?</h2>
-            <p style={{ fontSize: 16, color: "rgba(255,255,255,0.48)", marginBottom: 40, fontWeight: 300 }}>
-              Grab your bricks, bring your ideas, and get ready to build the future.
+              className="font-bebas text-white text-center"
+              style={{ fontSize: "clamp(52px, 7vw, 84px)", letterSpacing: 4, marginBottom: 16, textShadow: "3px 3px 0 rgba(0,0,0,0.2)" }}
+            >🏆 Winners</h2>
+            <p className="text-center" style={{ fontSize: 18, color: "rgba(255,255,255,0.45)", lineHeight: 1.85, fontWeight: 300, maxWidth: 500, margin: "0 auto 64px" }}>
+              Congratulations to all the champions who rose to the challenge across five epic days.
             </p>
-            <button
-              className="font-bebas inline-block cursor-pointer"
-              style={{
-                background: Y, color: NK, padding: "16px 72px", border: "none",
-                fontSize: 22, letterSpacing: 3, fontWeight: 900,
-                borderRadius: 6, borderBottom: "5px solid #a87e00",
-                boxShadow: "0 10px 36px rgba(245,196,0,0.3)",
-                transition: "transform 0.15s, box-shadow 0.15s, border-bottom-width 0.1s",
-              }}
-              onMouseEnter={e => { const b = e.currentTarget as HTMLButtonElement; b.style.transform = "translateY(-4px)"; b.style.boxShadow = "0 18px 48px rgba(245,196,0,0.42)"; b.style.borderBottomWidth = "3px"; }}
-              onMouseLeave={e => { const b = e.currentTarget as HTMLButtonElement; b.style.transform = "none"; b.style.boxShadow = "0 10px 36px rgba(245,196,0,0.3)"; b.style.borderBottomWidth = "5px"; }}
-            >Register Now</button>
+
+            {WINNERS.map((ev) => (
+              <div key={ev.event} style={{ marginBottom: 64 }}>
+                {/* Event header */}
+                <div className="flex items-center" style={{ gap: 16, marginBottom: 28 }}>
+                  <div style={{ height: 3, width: 32, background: ev.color, borderRadius: 2, flexShrink: 0 }} />
+                  <h3
+                    className="font-bebas"
+                    style={{ fontSize: 32, letterSpacing: 3, color: ev.color }}
+                  >{ev.event}</h3>
+                  <div style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.07)" }} />
+                </div>
+
+                {/* Podium cards */}
+                <div
+                  className="winners-grid"
+                  style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 18 }}
+                >
+                  {ev.podium.map((p) => {
+                    const badge = PLACE_COLORS[p.place];
+                    return (
+                      <div key={p.place} className="winner-card">
+                        {/* Card top bar in event color */}
+                        <div style={{ height: 4, background: badge.bg }} />
+                        <div style={{ padding: "24px" }}>
+                          <div className="flex items-center" style={{ gap: 14, marginBottom: 16 }}>
+                            <div
+                              className="place-badge font-bebas"
+                              style={{ background: badge.bg, color: badge.label }}
+                            >{p.place}</div>
+                            <div>
+                              <div className="font-bebas text-white" style={{ fontSize: 20, letterSpacing: 1, lineHeight: 1.1 }}>{p.label}</div>
+                            </div>
+                          </div>
+                          <div style={{ display: "flex", flexWrap: "wrap", gap: 0 }}>
+                            {p.members.map((m) => (
+                              <span key={m} className="member-chip">{m}</span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -337,14 +541,14 @@ export default function TranscendPage() {
         >
           <div>
             <div className="font-bebas" style={{ fontSize: 17, letterSpacing: 5, color: Y }}>ISTE NITK</div>
-            <div style={{ fontSize: 11, color: "rgba(255,255,255,0.2)", marginTop: 3 }}>Indian Society for Technical Education · NITK Surathkal</div>
+            <div style={{ fontSize: 11, color: "rgba(255, 255, 255, 0.45)", marginTop: 3 }}>Indian Society for Technical Education · NITK Surathkal</div>
           </div>
           <div className="flex" style={{ gap: 28 }}>
             {["Home","Events","Instagram","Contact"].map(l => (
               <a
                 key={l} href="#"
                 className="no-underline transition-colors duration-200 hover:text-[#F5C400]"
-                style={{ fontSize: 11, fontWeight: 600, letterSpacing: 2, textTransform: "uppercase", color: "rgba(255,255,255,0.22)" }}
+                style={{ fontSize: 11, fontWeight: 600, letterSpacing: 2, textTransform: "uppercase", color: "rgba(255, 255, 255, 0.53)" }}
               >{l}</a>
             ))}
           </div>
