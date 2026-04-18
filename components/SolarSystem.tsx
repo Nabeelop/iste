@@ -15,7 +15,7 @@ interface Planet {
   link: string
 }
 
-export const SolarSystem = () => {
+const SolarSystem = () => {
   const router = useRouter()
   const [hoveredPlanet, setHoveredPlanet] = useState<number | null>(null)
   const [selectedPlanet, setSelectedPlanet] = useState<number | null>(null)
